@@ -4,15 +4,14 @@ from flask import Flask, render_template, request
 #importing file copying module
 import os as os
 #numpy module
-import numpy as np
+
 # import project specific files
 import lib.pymapdl.remote_bimetallic
 from lib.constants import *
 
 #an app instance is opened using variable app
-app = flask.Flask(__name__)
-#open app with debugging disabled 
-app.config["DEBUG"] = False
+app = Flask(__name__)
+
 #current working direcory is stored in variable cwd
 cwd = os.getcwd()
 
