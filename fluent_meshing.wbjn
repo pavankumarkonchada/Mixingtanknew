@@ -1,0 +1,22 @@
+﻿import os
+import subprocess
+
+# encoding: utf-8
+# 2022 R2
+
+SetScriptVersion(Version="22.2.192")
+
+#creating FLuent with meshing component in workbench
+
+template1 = GetTemplate(TemplateName="Fluid Flow with Fluent Meshing")
+system1 = template1.CreateSystem()
+
+#opening geometry tab and running spaceclaim script
+
+geometry1 = system1.GetContainer(ComponentName="Geometry")
+geometry1.Edit(IsSpaceClaimGeometry=True)
+DSscript = open("C:\check\spaceclaim_script.py", "r")
+DSscriptcommand=DSscript.read()
+DSscript.close()
+geometry1.SendCommand(Language='Python', Command = DSscriptcommand)
+geometry1.Update()

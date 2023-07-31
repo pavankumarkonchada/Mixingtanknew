@@ -1,0 +1,8 @@
+/COM,ANSYS RELEASE 2022 R2           BUILD 22.2      UP20220516       16:00:24
+
+ *** WARNING ***                         CP =       0.094   TIME= 16:00:25
+ Altering the abort level key is not recommended.                        
+
+ *** WARNING ***                         CP =       0.094   TIME= 16:00:25
+ The geometry is not available.  Issue the RESUME command to restore the 
+ database.  The NUMVAR command is ignored.                               
