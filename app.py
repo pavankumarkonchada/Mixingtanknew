@@ -62,7 +62,7 @@ def calculator():
     flag2 = ''
 
     #variable declaration for variable wkdir
-    wkdir= r'O:\Mixing_tank_py_web_app\geometry-sample\artery.scdoc'
+    wkdir= r'pavankumarkonchada\Mixingtanknew\geometry-sample\artery.scdoc'
     if request.method == 'POST' :
 
         #The location where the inputs have to be stored is obtained from the user, folder with same name is created
