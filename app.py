@@ -1,8 +1,8 @@
 #importing web application related modules
-import flask
+#import flask
 from flask import Flask, render_template, request
 #importing file copying module
-import os as os
+#import os as os
 #numpy module
 
 # import project specific files
