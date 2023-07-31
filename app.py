@@ -50,7 +50,7 @@ def calculator():
     in1_len = 30
     in2_len = 30
     imp_rad = 20
-    rslt_img= r"O:\Mixing_tank_py_web_app\static\default_img.png"
+    rslt_img= r"pavankumarkonchada\Mixingtanknew\static\default_img.png"
     inlet_press=0.
     shear_int=0.
 
@@ -62,7 +62,7 @@ def calculator():
     flag2 = ''
 
     #variable declaration for variable wkdir
-    wkdir= r'O:\Mixing_tank_py_web_app\geometry-sample\artery.scdoc'
+    wkdir= r'pavankumarkonchada\Mixingtanknew\geometry-sample\artery.scdoc'
     if request.method == 'POST' :
 
         #The location where the inputs have to be stored is obtained from the user, folder with same name is created
@@ -115,7 +115,7 @@ def calculator():
         
         #opens the text file which contains all the outputs from the fluent run (right now it is based on the assumption that there are only 2 numerical values separated by a comma)
         #text file with result is opened in read mode
-        file=open("O:\Mixing_tank_py_web_app\myfile.txt","r")
+        file=open("pavankumarkonchada\Mixingtanknew\myfile.txt","r")
         #contents of the file are stored in variable post
         post=file.readline()
         postproc=[0,0]
