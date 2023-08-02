@@ -37,4 +37,4 @@ def calculator():
     #these flag variables are used to identify if the solution has run or not
     flag = ''
     flag2=''
-        return render_template('inputpage.html')
+    return render_template('inputpage.html')
