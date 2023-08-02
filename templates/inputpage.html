@@ -8,6 +8,37 @@
 <title>WebApp Demo with PyFluent</title>
 
 	
+<script language="javascript">
+function fetchData() {
+document.getElementsByName('SolveStatus')[0].value = "Solve in Progress"
+b=document.getElementById("SolveStatus");
+b.style.backgroundColor='red';
+}
+</script>
+
+<div class="container">
+        <div class="Title">
+            <h1>AUTOMATION OF FLOW FIELD IN A MIXING VESSEL</h1>
+        </div>
+
+        <div class="Input-Header">
+            <b><u>INPUTS</u></b> </label> <br/>
+        </div>
+        
+        <div class="Input-Names">
+        <label for="folder">Folder Name </label><br/><br/>
+        <label for="geomfile" class="custom-file-upload" >Geometry file upload</label><br/><br/>
+        <label for="boundary">No. of Boundary layers</label> <br/><br/>
+        <label for="growth">Growth rate </label> <br/><br/>
+        <label for="cores">Number of cores </label> <br/><br/>
+        <label for="flow">Inlet flow rate (m^3/s) </label> <br/><br/>
+        <label for="meshsize">Mesh size (mm) </label> <br/><br/>
+        <label for="outlen">outlet length (mm) </label> <br/><br/>
+        <label for="in1len">inlet 1 length (mm) </label> <br/><br/>
+        <label for="in2len">inlet 2 length (mm) </label> <br/><br/>
+        <label for="impellerradius">impeller radius (mm) </label> <br/><br/>
+        </div>
+	
 </body>
 </html>
 
