@@ -46,7 +46,7 @@ def calculator():
                            E21=my_cores,
                            E22=my_flow,
                            c21=my_meshsize,
-                           Flag2=flag2,
+                           Flag2=0,
                            ip=inlet_press,
                            ws=shear_int,
                            C1=out_len,
