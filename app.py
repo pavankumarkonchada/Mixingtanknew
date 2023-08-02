@@ -38,7 +38,7 @@ def calculator():
     flag = ''
     flag2=''
         return render_template('inputpage.html',
-                           Flag = flag,
+                           Flag = 0,
                            SolveStatus='Solved',
                            output_image_url=image,
                            L2=my_boundary,
