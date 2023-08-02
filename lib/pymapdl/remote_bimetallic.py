@@ -1,5 +1,4 @@
 import os
-from ansys.mapdl.core import launch_mapdl
 import numpy as np
 from ansys.fluent.core import launch_fluent
 import ansys.fluent.core as pyfluent
