@@ -7,6 +7,8 @@ import os
 # Add the 'lib' folder to the Python path
 lib_path = os.path.join(os.path.dirname(__file__), 'lib')
 sys.path.append(lib_path)
+import lib.pymapdl.remote_bimetallic
+from lib.constants import *
 
 
 app = Flask(__name__)
