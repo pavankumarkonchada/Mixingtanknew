@@ -37,19 +37,4 @@ def calculator():
     #these flag variables are used to identify if the solution has run or not
     flag = ''
     flag2=''
-        return render_template('inputpage.html',
-                           Flag = 0,
-                           SolveStatus='Solved',
-                           output_image_url=image,
-                           L2=my_boundary,
-                           t2=my_growth,
-                           E21=my_cores,
-                           E22=my_flow,
-                           c21=my_meshsize,
-                           Flag2=flag2,
-                           ip=inlet_press,
-                           ws=shear_int,
-                           C1=out_len,
-                           C11=in1_len,
-                           C111=in2_len,
-                           C1111=imp_rad)
+        return render_template('inputpage.html')
