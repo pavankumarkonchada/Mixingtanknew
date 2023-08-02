@@ -57,6 +57,35 @@ b.style.backgroundColor='red';
         </form>
 		     </div>
         <br/> <br/> <br/>
+	div class="Output-Header">
+        <b><u>OUTPUTS</u></b> </label> <br/><br/>
+    </div>
+
+    <div class="Output-Names">
+        
+        <label for="SolveStatus">Solve Status </label> <br/><br/>
+        <label for="areapress">Area-weighted avg Pressure (Pa) </label> <br/><br/>
+		<label for="shear">Wall shear (N/m^2) </label> <br/><br/>
+
+    </div>
+    <div class="Output-Values">
+
+        {%if Flag%}
+        <input type="text" id="SolveStatus" name="SolveStatus" readonly="readonly" value={{SolveStatus}}> <br/>
+        <input type="number" id="areapress" name="areapress" readonly="readonly" ,
+               value={{ip}}> <br/>
+		<input type="number" id="shear" name="shear" readonly="readonly" ,
+               value={{ws}}> <br/><br/>
+
+
+        {% else %}
+        <input type="text" id="SolveStatus" name="SolveStatus" readonly="readonly" value="Not Solved Yet"> <br/>
+        <input type="float" id="areapress" name="areapress" readonly="readonly"> <br/><br/>
+		<input type="float" id="shear" name="shear" readonly="readonly"> <br/><br/>
+        {%endif%}
+
+        <br/> <br/> <br/>
+    </div>
 		    
 </body>
 </html>
