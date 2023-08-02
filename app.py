@@ -9,7 +9,7 @@ lib_path = os.path.join(os.path.dirname(__file__), 'lib')
 sys.path.append(lib_path)
 subfolder_path = os.path.join(lib_path, 'pymapdl')
 sys.path.append(subfolder_path)
-import remote_bimetallic
+import lib.pymapdl.remote_bimetallic
 from lib.constants import *
 
 
