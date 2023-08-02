@@ -29,7 +29,6 @@ def calculator():
     in1_len = 30
     in2_len = 30
     imp_rad = 20
-    rslt_img= r"pavankumarkonchada\Mixingtanknew\static\default_img.png"
     inlet_press=0.
     shear_int=0.
     
