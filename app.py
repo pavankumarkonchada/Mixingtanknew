@@ -14,6 +14,21 @@ from lib.constants import *
 
 
 app = Flask(__name__)
+app.config["DEBUG"] = False
+cwd = os.getcwd()
+app.config["ALLOWED_EXT_GEOM"]=["STP","STL","SCDOC","X_T","STEP"]
+
+def geomext(filename):
+    if not "." in filename:
+        return False
+    ext=filename.rsplit(".",1)[1]
+    if ext.upper() in app.config["ALLOWED_EXT_GEOM"]:
+        return True
+    else:
+        return False
+
+def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):  
+    lib.pymapdl.remote_bimetallic.solve_mix(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp)
 
 @app.route("/", methods=['POST', 'GET'])
 
@@ -33,6 +48,18 @@ def calculator():
     shear_int=0.
     
     image = ''
+
+    wkdir= ''
+    if request.method == 'POST' :
+
+        #The location where the inputs have to be stored is obtained from the user, folder with same name is created
+        path = os.getcwd()
+
+        string=request.form["folder"]
+        new_wdir_path = os.path.join(path,string)
+        if not os.path.exists(new_wdir_path):
+            print("folder doesn't exist")
+            os.mkdir(new_wdir_path)
 
     #these flag variables are used to identify if the solution has run or not
     flag = ''
