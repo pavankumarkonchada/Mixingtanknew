@@ -3,17 +3,20 @@
 <html>
 <body>
 
+
 <link rel="stylesheet" href="../static/style.css">
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <title>WebApp Demo with PyFluent</title>
-
-	
 <script language="javascript">
+
 function fetchData() {
 document.getElementsByName('SolveStatus')[0].value = "Solve in Progress"
 b=document.getElementById("SolveStatus");
 b.style.backgroundColor='red';
+
 }
+
+
 </script>
 
 <div class="container">
@@ -39,8 +42,9 @@ b.style.backgroundColor='red';
         <label for="impellerradius">impeller radius (mm) </label> <br/><br/>
         </div>
 
-	
-	    <div class="Input-Values">
+
+        
+    <div class="Input-Values">
         <form onsubmit='fetchData()' method="POST" enctype="multipart/form-data">
             <input type="text" id="folder" name="folder" required> <br/>
             <input type="file" id="geomfile" name="geomfile" required/><br/><br/>
@@ -54,10 +58,15 @@ b.style.backgroundColor='red';
             <input type="number" step=0.1 id="in2len" name="in2len" value={{C111}} required> <br/><br/>
             <input type="number" step=0.1 id="impellerradius" name="impellerradius" value={{C1111}} required> <br/><br/>            
             <button type="submit" value="submit" name="Solve">Solve</button>
+            
+
         </form>
-		     </div>
+
         <br/> <br/> <br/>
-	div class="Output-Header">
+
+    </div>
+
+    <div class="Output-Header">
         <b><u>OUTPUTS</u></b> </label> <br/><br/>
     </div>
 
@@ -86,7 +95,3 @@ b.style.backgroundColor='red';
 
         <br/> <br/> <br/>
     </div>
-		    
-</body>
-</html>
-
