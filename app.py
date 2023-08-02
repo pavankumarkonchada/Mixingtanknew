@@ -1,13 +1,7 @@
 #importing web application related modules
 #import flask
-from flask import Flask, render_template, request
-#importing file copying module
-#import os as os
-#numpy module
+from flask import Flask, render_template
 
-# import project specific files
-import lib.pymapdl.remote_bimetallic
-from lib.constants import *
 
 #an app instance is opened using variable app
 app = Flask(__name__)
