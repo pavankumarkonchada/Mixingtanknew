@@ -60,6 +60,39 @@ def calculator():
         if not os.path.exists(new_wdir_path):
             print("folder doesn't exist")
             os.mkdir(new_wdir_path)
+        #Prints the user input folder
+        print(new_wdir_path)
+        #prints the file name uploaded
+        print(request.files)
+
+        #checks if the file uploaded has a valid filename,valid extension or not
+        if request.files:
+            firstfile=request.files["geomfile"]
+            if firstfile.filename=="":
+                print("file needs to have valid name")
+                return "<h1 style='color:red'>ERROR:invalid filename!</h1>"
+            
+            if not geomext(firstfile.filename):
+                print("upload geometry file with proper extension")
+                return "<h1 style='color:red'>ERROR: invalid geometry extension!</h1>"
+            
+            #saves the user uploaded file to the user uploaded location
+            firstfile.save(os.path.join(new_wdir_path, firstfile.filename))
+            wkdir=os.path.join(new_wdir_path, firstfile.filename)
+            
+            #All the inputs provided by the user are obtained and stored in variables
+            my_boundary = float(request.form.get('boundary'))
+            my_growth = float(request.form.get('growth'))
+            my_cores = float(request.form.get('cores'))
+            my_flow = float(request.form.get('flow'))
+            my_meshsize = float(request.form.get('meshsize'))
+            out_len= float(request.form.get('outlen'))
+            in1_len= float(request.form.get('in1len'))
+            in2_len= float(request.form.get('in2len'))
+            imp_rad= float(request.form.get('impellerradius'))
+            
+        else:
+            print("method is not post")
 
     #these flag variables are used to identify if the solution has run or not
     flag = ''
