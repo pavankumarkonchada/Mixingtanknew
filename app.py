@@ -25,7 +25,11 @@ cwd = os.getcwd()
 app.config["ALLOWED_EXT_GEOM"]=["STP","STL","SCDOC","X_T","STEP"]
 connection_string = os.environ.get('STORAGE_CONNECTION_STRING')
 blob_service_client = BlobServiceClient.from_connection_string(connection_string)
-
+try:
+    container_client=blob_service_client.get_container_client(container="photos")
+    container_client.get_container_properties()
+except Exception as e:
+    container_client=blob_service_client.create_container_client("photos")
 def geomext(filename):
     if not "." in filename:
         return False
