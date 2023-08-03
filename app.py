@@ -33,7 +33,20 @@ def geomext(filename):
 
 def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):  
     lib.pymapdl.remote_bimetallic.solve_mix(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp)
+@app.route('/create_container_and_folder')
+def create_container_and_folder_route():
+    container_name = "mixingtank1"
+    folder_name = "mixingtank1folder"
+    create_container_and_folder(container_name, folder_name)
+    return "Container and folder created successfully!"
 
+def create_container_and_folder(container_name, folder_name):
+    container_client = blob_service_client.get_container_client(container_name)
+    container_client.create_container()
+    
+    blob_name = folder_name + '/'
+    blob_client = container_client.get_blob_client(blob_name)
+    blob_client.upload_blob('')
 @app.route("/", methods=['POST', 'GET'])
 
 def calculator():  
