@@ -39,10 +39,10 @@ def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):
 def create_container_and_folder_route():
     container_name = "mixingtank1"
     folder_name = "mixingtank1folder"
-    create_container_and_folder(container_name, folder_name)
+    create_container_and_folder(blob_service_client, container_name, folder_name)
     return "Container and folder created successfully!"
 
-def create_container_and_folder(container_name, folder_name):
+def create_container_and_folder(blob_service_client, container_name, folder_name):
     container_client = blob_service_client.get_container_client(container_name)
     container_client.create_container()
     
