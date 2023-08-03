@@ -24,7 +24,17 @@ app.config["DEBUG"] = False
 cwd = os.getcwd()
 app.config["ALLOWED_EXT_GEOM"]=["STP","STL","SCDOC","X_T","STEP"]
 connection_string = "DefaultEndpointsProtocol=https;AccountName=mixingtankpharmastorage;AccountKey=OoIE/WILfKbanYNUuwHYrADLjfOa2oJz7jIHG2RR2/r6npaZ2d380TQWL5elVdDFKMfoJG8qVb+t+AStdnfhdA==;EndpointSuffix=core.windows.net"
-blob_service_client = BlobServiceClient.from_connection_string(connection_string)
+container_name = "photos" # container name in which images will be store in the storage account
+print("Connection String:", connect_str)
+
+blob_service_client = BlobServiceClient.from_connection_string(conn_str=connect_str) # create a blob service client to interact with the storage account
+try:
+    container_client = blob_service_client.get_container_client(container=container_name) # get container client to interact with the container in which images will be stored
+    container_client.get_container_properties() # get properties of the container to force exception to be thrown if container does not exist
+except Exception as e:
+    print(e)
+    print("Creating container...")
+    container_client = blob_service_client.create_container(container_name) 
 
 def geomext(filename):
     if not "." in filename:
