@@ -1,6 +1,7 @@
 #importing web application related modules
 #import flask
 from flask import Flask, render_template, request
+from azure.storage.blob import BlockBlobService, PublicAccess
 import sys
 import os
 
@@ -50,6 +51,11 @@ def calculator():
     image = ''
 
     wkdir= ''
+    account_name = 'mixingtankpharmastorage'
+    account_key = 'OoIE/WILfKbanYNUuwHYrADLjfOa2oJz7jIHG2RR2/r6npaZ2d380TQWL5elVdDFKMfoJG8qVb+t+AStdnfhdA=='
+
+# Create a connection to Azure Blob Storage
+    block_blob_service = BlockBlobService(account_name=account_name, account_key=account_key)
     if request.method == 'POST' :
 
         #The location where the inputs have to be stored is obtained from the user, folder with same name is created
