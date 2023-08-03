@@ -23,7 +23,7 @@ app = Flask(__name__)
 app.config["DEBUG"] = False
 cwd = os.getcwd()
 app.config["ALLOWED_EXT_GEOM"]=["STP","STL","SCDOC","X_T","STEP"]
-connection_string = "DefaultEndpointsProtocol=https;AccountName=mixingtankpharmastorage;AccountKey=OoIE/WILfKbanYNUuwHYrADLjfOa2oJz7jIHG2RR2/r6npaZ2d380TQWL5elVdDFKMfoJG8qVb+t+AStdnfhdA==;EndpointSuffix=core.windows.net"
+connection_string = os.environ.get('STORAGE_CONNECTION_STRING')
 blob_service_client = BlobServiceClient.from_connection_string(connection_string)
 
 def geomext(filename):
@@ -37,24 +37,13 @@ def geomext(filename):
 
 def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):  
     lib.pymapdl.remote_bimetallic.solve_mix(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp)
-def create_container_and_folder():
-    try:
-        container_client = blob_service_client.get_container_client("mixingtankcontainer")
-        container_client.create_container()
-
-        blob_name = "mixingtank" + '/'
-        blob_client = container_client.get_blob_client(blob_name)
-        blob_client.upload_blob('')
-    except Exception as e:
-        print("Error creating container and folder:", str(e))
-        logging.error(error_msg)
 
 
 
 @app.route("/", methods=['POST', 'GET'])
 
 def calculator():  
-    create_container_and_folder()
+    
     # These are the default values that are shown in the website in place of the variables to be entered
     my_file='folder'
     my_boundary = 4
