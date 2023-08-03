@@ -36,19 +36,7 @@ def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):
 
 
 @app.route("/", methods=['POST', 'GET'])
-def create_container_and_folder_route():
-    container_name = "mixingtank1"
-    folder_name = "mixingtank1folder"
-    create_container_and_folder(blob_service_client, container_name, folder_name)
-    return "Container and folder created successfully!"
 
-def create_container_and_folder(blob_service_client, container_name, folder_name):
-    container_client = blob_service_client.get_container_client(container_name)
-    container_client.create_container()
-    
-    blob_name = folder_name + '/'
-    blob_client = container_client.get_blob_client(blob_name)
-    blob_client.upload_blob('')
 def calculator():  
     # These are the default values that are shown in the website in place of the variables to be entered
     my_file='folder'
@@ -134,4 +122,4 @@ def calculator():
                            C111=in2_len,
                            C1111=imp_rad)
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=8000)    
+    app.run(host='0.0.0.0',debug=True,port=8000)    
