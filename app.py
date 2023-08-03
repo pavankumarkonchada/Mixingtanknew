@@ -1,7 +1,7 @@
 #importing web application related modules
 #import flask
 from flask import Flask, render_template, request
-from azure.storage.blob import BlockBlobService, PublicAccess
+#from azure.storage.blob import BlockBlobService, PublicAccess
 import sys
 import os
 
