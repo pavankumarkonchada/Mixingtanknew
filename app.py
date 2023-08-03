@@ -25,11 +25,7 @@ cwd = os.getcwd()
 app.config["ALLOWED_EXT_GEOM"]=["STP","STL","SCDOC","X_T","STEP"]
 connection_string = "DefaultEndpointsProtocol=https;AccountName=mixingtankpharmastorage;AccountKey=OoIE/WILfKbanYNUuwHYrADLjfOa2oJz7jIHG2RR2/r6npaZ2d380TQWL5elVdDFKMfoJG8qVb+t+AStdnfhdA==;EndpointSuffix=core.windows.net"
 blob_service_client = BlobServiceClient.from_connection_string(connection_string)
-try:
-    container_client=blob_service_client.get_container_client(container="photos")
-    container_client.get_container_properties()
-except Exception as e:
-    container_client=blob_service_client.create_container_client("photos")
+
 def geomext(filename):
     if not "." in filename:
         return False
