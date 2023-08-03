@@ -18,7 +18,7 @@ app = Flask(__name__)
 app.config["DEBUG"] = False
 cwd = os.getcwd()
 app.config["ALLOWED_EXT_GEOM"]=["STP","STL","SCDOC","X_T","STEP"]
-storage_connection_string = os.environ.get('STORAGE_CONNECTION_STRING')
+#storage_connection_string = os.environ.get('STORAGE_CONNECTION_STRING')
 
 # Create a connection to Azure Blob Storage using the connection string
 #blob_service = BlockBlobService(connection_string=storage_connection_string)
