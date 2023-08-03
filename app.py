@@ -121,4 +121,5 @@ def calculator():
                            C11=in1_len,
                            C111=in2_len,
                            C1111=imp_rad)
-    
+if __name__ == '__main__':
+    app.run(host='0.0.0.0',port=8000)    
