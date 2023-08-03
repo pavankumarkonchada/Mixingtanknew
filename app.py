@@ -52,7 +52,7 @@ def create_container_and_folder():
 
 
 @app.route("/", methods=['POST', 'GET'])
-
+create_container_and_folder()
 def calculator():  
     # These are the default values that are shown in the website in place of the variables to be entered
     my_file='folder'
@@ -118,7 +118,7 @@ def calculator():
             
         else:
             print("method is not post")
-
+    
     #these flag variables are used to identify if the solution has run or not
     flag = ''
     flag2=''
@@ -138,5 +138,5 @@ def calculator():
                            C111=in2_len,
                            C1111=imp_rad)
 if __name__ == '__main__':
-    create_container_and_folder()
+    
     app.run(host='0.0.0.0',debug=True,port=8000)    
