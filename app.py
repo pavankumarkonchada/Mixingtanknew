@@ -1,7 +1,8 @@
 #importing web application related modules
 #import flask
 from flask import Flask, render_template, request
-from azure.storage.blob import BlockBlobService, PublicAccess
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
+
 import sys
 import os
 
@@ -18,10 +19,8 @@ app = Flask(__name__)
 app.config["DEBUG"] = False
 cwd = os.getcwd()
 app.config["ALLOWED_EXT_GEOM"]=["STP","STL","SCDOC","X_T","STEP"]
-#storage_connection_string = os.environ.get('STORAGE_CONNECTION_STRING')
-
-# Create a connection to Azure Blob Storage using the connection string
-#blob_service = BlockBlobService(connection_string=storage_connection_string)
+connection_string = "DefaultEndpointsProtocol=https;AccountName=mixingtankpharmastorage;AccountKey=OoIE/WILfKbanYNUuwHYrADLjfOa2oJz7jIHG2RR2/r6npaZ2d380TQWL5elVdDFKMfoJG8qVb+t+AStdnfhdA==;EndpointSuffix=core.windows.net"
+blob_service_client = BlobServiceClient.from_connection_string(connection_string)
 
 def geomext(filename):
     if not "." in filename:
