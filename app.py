@@ -2,9 +2,12 @@
 #import flask
 from flask import Flask, render_template, request
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
-
 import sys
 import os
+import logging
+
+# Set up a logging handler to write log messages to a file
+logging.basicConfig(filename='app.log', level=logging.INFO)
 
 # Add the 'lib' folder to the Python path
 lib_path = os.path.join(os.path.dirname(__file__), 'lib')
@@ -43,6 +46,7 @@ def create_container_and_folder():
         blob_client.upload_blob('')
     except Exception as e:
         print("Error creating container and folder:", str(e))
+        logging.error(error_msg)
 
 
 
