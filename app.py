@@ -5,9 +5,10 @@ from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 import sys
 import os
 import logging
+print("Current working directory:", os.getcwd())
 
-# Set up a logging handler to write log messages to a file
-logging.basicConfig(filename='app.log', level=logging.INFO)
+log_file_path = os.path.join(os.getcwd(), 'app.log')
+logging.basicConfig(filename=log_file_path, level=logging.INFO)
 
 # Add the 'lib' folder to the Python path
 lib_path = os.path.join(os.path.dirname(__file__), 'lib')
