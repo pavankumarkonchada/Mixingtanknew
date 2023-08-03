@@ -52,8 +52,9 @@ def create_container_and_folder():
 
 
 @app.route("/", methods=['POST', 'GET'])
-create_container_and_folder()
+
 def calculator():  
+    create_container_and_folder()
     # These are the default values that are shown in the website in place of the variables to be entered
     my_file='folder'
     my_boundary = 4
