@@ -5,6 +5,8 @@ from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 import sys
 import os
 import logging
+import requests
+from requests.auth import HTTPBasicAuth
 print("Current working directory:", os.getcwd())
 
 log_file_path = os.path.join(os.getcwd(), 'app.log')
@@ -24,8 +26,9 @@ app.config["DEBUG"] = False
 cwd = os.getcwd()
 app.config["ALLOWED_EXT_GEOM"]=["STP","STL","SCDOC","X_T","STEP"]
 connect_str = f"DefaultEndpointsProtocol=https;AccountName=trailmixin;AccountKey=3SVrdfhrb+3zp8yJgMsvbBS7xACbuoSH/Mh+/Cz/eRUWVZH0mBYbaSMxqBfEeAcsmKbWMavId984+AStJrMV5g==;EndpointSuffix=core.windows.net" # retrieve the connection string from the environment variable
-container_name = "photos" # container name in which images will be store in the storage account
+container_name = "mixstore" # container name in which images will be store in the storage account
 print("Connection String:", connect_str)
+
 
 blob_service_client = BlobServiceClient.from_connection_string(conn_str=connect_str) # create a blob service client to interact with the storage account
 try:
@@ -35,6 +38,11 @@ except Exception as e:
     print(e)
     print("Creating container...")
     container_client = blob_service_client.create_container(container_name) # create a container in the storage account if it does not exist
+def retrieve_image_from_remote_server(server_ip, file_path, username, password):
+    url = f"http://{server_ip}/{file_path}"
+    response = requests.get(url, auth=HTTPBasicAuth(username, password), stream=True)
+    return response
+
 def geomext(filename):
     if not "." in filename:
         return False
@@ -65,12 +73,19 @@ def calculator():
     in2_len = 30
     imp_rad = 20
     inlet_press=0.
-    shear_int=0.
-    
+    shear_int=0.   
     image = ''
-
     wkdir= ''
-   
+    server_ip = "192.168.12.221"  # Replace with the IP address of the remote server
+    file_path = "E:/Drp/Pressure.png"  # Replace with the actual file path on the remote server
+    username = "pavan"  # Replace with the actual username for authentication
+    password = "cadfem1"  # Replace with the actual password for authentication
+    response = retrieve_image_from_remote_server(server_ip, file_path, username, password)
+    if response.status_code == 200:
+        blob_client = blob_service_client.get_blob_client(container=container_name, blob='Pressure.png')
+        blob_client.upload_blob(response.content)
+        return "Image uploaded successfully."
+    return "Image retrieval failed."
 
 # Create a connection to Azure Blob Storage
     #block_blob_service = BlockBlobService(account_name=account_name, account_key=account_key)
