@@ -23,7 +23,7 @@ app = Flask(__name__)
 app.config["DEBUG"] = False
 cwd = os.getcwd()
 app.config["ALLOWED_EXT_GEOM"]=["STP","STL","SCDOC","X_T","STEP"]
-connection_string = "DefaultEndpointsProtocol=https;AccountName=mixingtankstorage;AccountKey=lUa5oHum9YBvDZj+Rw0BPVmTPcGIXE8NfQiy490C2fmbG8PTcCTNYyzTfMxuXv5mCOP66zxNGh4e+AStJpygBA==;EndpointSuffix=core.windows.net
+connect_str = "DefaultEndpointsProtocol=https;AccountName=mixingtankstorage;AccountKey=lUa5oHum9YBvDZj+Rw0BPVmTPcGIXE8NfQiy490C2fmbG8PTcCTNYyzTfMxuXv5mCOP66zxNGh4e+AStJpygBA==;EndpointSuffix=core.windows.net
 
 "
 container_name = "photos" # container name in which images will be store in the storage account
