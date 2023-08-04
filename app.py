@@ -23,9 +23,7 @@ app = Flask(__name__)
 app.config["DEBUG"] = False
 cwd = os.getcwd()
 app.config["ALLOWED_EXT_GEOM"]=["STP","STL","SCDOC","X_T","STEP"]
-connect_str = "DefaultEndpointsProtocol=https;AccountName=mixingtankstorage;AccountKey=lUa5oHum9YBvDZj+Rw0BPVmTPcGIXE8NfQiy490C2fmbG8PTcCTNYyzTfMxuXv5mCOP66zxNGh4e+AStJpygBA==;EndpointSuffix=core.windows.net
-
-"
+connect_str = f"DefaultEndpointsProtocol=https;AccountName=trailmixin;AccountKey=3SVrdfhrb+3zp8yJgMsvbBS7xACbuoSH/Mh+/Cz/eRUWVZH0mBYbaSMxqBfEeAcsmKbWMavId984+AStJrMV5g==;EndpointSuffix=core.windows.net" # retrieve the connection string from the environment variable
 container_name = "photos" # container name in which images will be store in the storage account
 print("Connection String:", connect_str)
 
@@ -36,8 +34,7 @@ try:
 except Exception as e:
     print(e)
     print("Creating container...")
-    container_client = blob_service_client.create_container(container_name) 
-
+    container_client = blob_service_client.create_container(container_name) # create a container in the storage account if it does not exist
 def geomext(filename):
     if not "." in filename:
         return False
