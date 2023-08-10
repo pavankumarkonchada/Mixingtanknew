@@ -96,7 +96,7 @@ def calculator():
             print("reaching save")
             firstfile.save(os.path.join(new_wdir_path, firstfile.filename))
             wkdir=os.path.join(new_wdir_path, firstfile.filename)
-            print(wdir)
+            print("crossing save")
             
             #All the inputs provided by the user are obtained and stored in variables
             my_boundary = float(request.form.get('boundary'))
