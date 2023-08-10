@@ -66,7 +66,7 @@ def calculator():
     wkdir= ''
 
     if request.method == 'POST' :
-
+        return "<h1 style='color:red'>Entering method</h1>"
         #The location where the inputs have to be stored is obtained from the user, folder with same name is created
         path = os.getcwd()
 
