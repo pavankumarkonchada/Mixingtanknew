@@ -1,5 +1,4 @@
 import os
-
 import shutil
 import paramiko
 import subprocess
@@ -35,12 +34,12 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
 
 
     #making a copy and replacing variables with values given by user in pyfluent file
-    original = r'O:\Mixing_tank_py_web_app\lib\pymapdl\mixing_tank_pyfluent.py'
-    target = r'O:\Mixing_tank_py_web_app\lib\pymapdl\mixing_tank_pyfluent1.py'
+    original = r'\lib\pymapdl\mixing_tank_pyfluent.py'
+    target = r'\lib\pymapdl\mixing_tank_pyfluent1.py'
     #shutil simply makes a copy at the target location
     shutil.copyfile(original, target)
 
-    file_path= r"O:\Mixing_tank_py_web_app\lib\pymapdl\mixing_tank_pyfluent1.py"
+    file_path= r"\lib\pymapdl\mixing_tank_pyfluent1.py"
     #the places where the text on the pyfluent file needs to be swapped out with user input is stored in dictionaries
     variable_values={'max_size':float(meshsize_auto),'growth_rate_bl':float(growthrate_auto),'in_vel':float(waterflowrate_auto)}
     variable_str={'import_filename':geom_dst2}
@@ -71,12 +70,12 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
 
 
     #making a copy and replacing variables with values given by user in correcting spaceclaim script
-    original_sc = r'O:\Mixing_tank_py_web_app\spaceclaim_script1.py'
-    target_sc = r'O:\Mixing_tank_py_web_app\spaceclaim_script2.py'
+    original_sc = r'\spaceclaim_script1.py'
+    target_sc = r'\spaceclaim_script2.py'
     #shutil simply makes a copy at the target location
     shutil.copyfile(original_sc, target_sc)
 
-    file_path_sc= r"O:\Mixing_tank_py_web_app\spaceclaim_script2.py"
+    file_path_sc= r"\spaceclaim_script2.py"
     #the places where the text on the spaceclaim script needs to be swapped out with user input is stored in dictionaries
     variable_string={'filename':remote_file_path_geom2, 'dest':geom_dst2}
     variable_number={'outlet_length':out_len,'inlet2_length':in2_len,'inlet1_length':in1_len,'Impeller_radius':imp_rad}
@@ -102,12 +101,12 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
 
 
     #making a copy and replacing variables with values given by user in correcting runwb file
-    original_runwb = r'O:\Mixing_tank_py_web_app\run_wb1.py'
-    target_runwb = r'O:\Mixing_tank_py_web_app\run_wb2.py'
+    original_runwb = r'\run_wb1.py'
+    target_runwb = r'\run_wb2.py'
     #shutil simply makes a copy at the target location
     shutil.copyfile(original_runwb, target_runwb)
 
-    file_path_runwb= r"O:\Mixing_tank_py_web_app\run_wb2.py"
+    file_path_runwb= r"\run_wb2.py"
     remote_file_path_runwb="r"+'"'+r"C:\check\fluent_meshing.wbjn"+'"'
     #the places where the text on the workbench journal needs to be swapped out with user input is stored in dictionaries
     variable_runwb={'journal_loc':remote_file_path_runwb}
@@ -133,16 +132,16 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     remote_username = 'pavan'     #remote machine username
     remote_password = 'Cadfemindia@2023' #remote machine password
     # Specify the local path, path where pyfluent file will be saved in remote machine
-    local_file_path = r'O:\Mixing_tank_py_web_app\lib\pymapdl\mixing_tank_pyfluent1.py'
+    local_file_path = r'\lib\pymapdl\mixing_tank_pyfluent1.py'
     remote_file_path = r'C:\check\mixing_tank_pyfluent.py'
     #specifying the local path,  path where runwb file will be saved in remote machine
-    local_file_path_runwb = r'O:\Mixing_tank_py_web_app\run_wb2.py'
+    local_file_path_runwb = r'\run_wb2.py'
     remote_file_path_runwb = r'C:\check\run_wb.py'
     #specifying the local path, path where journal file will be saved in remote machine
-    local_file_path_jou = r'O:\Mixing_tank_py_web_app\fluent_meshing.wbjn'
+    local_file_path_jou = r'\fluent_meshing.wbjn'
     remote_file_path_jou = r'C:\check\fluent_meshing.wbjn'
     #specifying the local path, path where spaceclaim script will be saved in remote machine
-    local_file_path_scscript = r'O:\Mixing_tank_py_web_app\spaceclaim_script2.py'
+    local_file_path_scscript = r'\spaceclaim_script2.py'
     remote_file_path_scscript = r'C:\check\spaceclaim_script.py'
 
 
@@ -168,8 +167,8 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     #the cxlayout file is stored in C under username folder everytime one uses fluent. It stores information regarding the workspace layout
     #This is needed as fluent changes to tab switching layout by default when using pyfluent and default workspace layout must be enforced each time
     #this will be tricky during remote execution, where we do not know the username in the target_layout, will have to give a predetermined username and use sftp.put()
-    original_layout = r'O:\Mixing_tank_py_web_app\fluent_layout\Default\.cxlayout.ini'
-    target_layout = r'C:\Users\hrithik\.cxlayout.ini'
+    original_layout = r'\fluent_layout\Default\.cxlayout.ini'
+    target_layout = r'C:\Users\pavan\.cxlayout.ini'
     shutil.copyfile(original_layout, target_layout)
 
     #printing to confirm if code is being read
@@ -208,7 +207,7 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
 
     #Image of q-criteria contour is transfered from remote machine to local machine using sftp.get()
     remote_press=r"C:\check\Q-criteria.png" 
-    local_press=r"O:\Mixing_tank_py_web_app\static\Q-criteria.png"
+    local_press=r"\static\Q-criteria.png"
     sftp.get(remote_press, local_press)
     #The sftp channel is closed
     sftp.close()
