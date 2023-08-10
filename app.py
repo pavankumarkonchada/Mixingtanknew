@@ -65,7 +65,7 @@ def calculator():
     image = ''
     wkdir= ''
 
-
+    
 # Create a connection to Azure Blob Storage
     #block_blob_service = BlockBlobService(account_name=account_name, account_key=account_key)
     if request.method == 'POST' :
@@ -111,6 +111,21 @@ def calculator():
             
         else:
             print("method is not post")
+        file=open("\myfile.txt","r")
+        pyFluent(my_boundary,my_growth,my_cores,my_flow,my_meshsize,wkdir,new_wdir_path,out_len,in1_len,in2_len,imp_rad)
+        post=file.readline()
+        postproc=[0,0]
+        postproc[0]=post.rsplit(",")[0]
+        postproc[1]=post.rsplit(",")[1]
+        file.close()
+        
+        #shows that the run is complete
+        print(RUN_COMPLETE)
+
+
+        inlet_press=postproc[0]
+        shear_int=postproc[1]
+    
     
     #these flag variables are used to identify if the solution has run or not
     flag = ''
