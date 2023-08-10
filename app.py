@@ -7,6 +7,7 @@ import os
 import subprocess
 import logging
 import requests
+import pywinrm
 
 from requests.auth import HTTPBasicAuth
 print("Current working directory:", os.getcwd())
@@ -48,7 +49,25 @@ def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):
 
 
 @app.route("/", methods=['POST', 'GET'])
+def create_folder():
+    # Configuration for the Windows VM
+    vm_ip = os.environ.get('VM_IP')
+    vm_username = os.environ.get('VM_USERNAME')
+    vm_password = os.environ.get('VM_PASSWORD')
 
+    # Connect to the Windows VM
+    session = pywinrm.Session(vm_ip, auth=(vm_username, vm_password))
+
+    # Command to create a folder (you can modify this as needed)
+    create_folder_command = "mkdir C:\\NewFolder"
+
+    # Execute the command remotely
+    result = session.run_ps(create_folder_command)
+    
+    if result.status_code == 0:
+        return "Folder created successfully."
+    else:
+        return "Failed to create folder."
 
         
 def calculator():  
