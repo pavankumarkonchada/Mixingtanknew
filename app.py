@@ -76,8 +76,6 @@ def calculator():
             print("folder doesn't exist")
             os.mkdir(new_wdir_path)
         #return "<h1 style='color:red'>crossing getcwd {{path}}</h1>"
-        if not os.path.exists(new_wdir_path):
-            print("folder doesn't exist")
         #Prints the user input folder
         print(new_wdir_path)
         #prints the file name uploaded
@@ -97,6 +95,7 @@ def calculator():
             #saves the user uploaded file to the user uploaded location
             firstfile.save(os.path.join(new_wdir_path, firstfile.filename))
             wkdir=os.path.join(new_wdir_path, firstfile.filename)
+            print(wdir)
             
             #All the inputs provided by the user are obtained and stored in variables
             my_boundary = float(request.form.get('boundary'))
