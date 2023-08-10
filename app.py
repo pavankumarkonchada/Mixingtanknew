@@ -1,6 +1,6 @@
 #importing web application related modules
 #import flask
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 import sys
 import os
