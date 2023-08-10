@@ -65,9 +65,6 @@ def calculator():
     image = ''
     wkdir= ''
 
-    
-# Create a connection to Azure Blob Storage
-    #block_blob_service = BlockBlobService(account_name=account_name, account_key=account_key)
     if request.method == 'POST' :
 
         #The location where the inputs have to be stored is obtained from the user, folder with same name is created
@@ -128,17 +125,17 @@ def calculator():
     
     
     #these flag variables are used to identify if the solution has run or not
-    flag = ''
-    flag2=''
+    flag = 1
+    flag2= 1
     return render_template('inputpage.html',
-                           Flag = 0,
+                           Flag = flag,
                            SolveStatus='Solved',
                            L2=my_boundary,
                            t2=my_growth,
                            E21=my_cores,
                            E22=my_flow,
                            c21=my_meshsize,
-                           Flag2=0,
+                           Flag2=flag2,
                            ip=inlet_press,
                            ws=shear_int,
                            C1=out_len,
@@ -147,4 +144,4 @@ def calculator():
                            C1111=imp_rad)
 if __name__ == '__main__':
     
-    app.run(host='0.0.0.0',debug=True,port=8000)    
+    app.run(host='0.0.0.0',debug=True)    
