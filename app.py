@@ -54,13 +54,13 @@ def create_folder():
     vm_ip = os.environ.get('VM_IP')
     vm_username = os.environ.get('VM_USERNAME')
     vm_password = os.environ.get('VM_PASSWORD')
-
+    print("eneterd")
     # Connect to the Windows VM
     session = pywinrm.Session(vm_ip, auth=(vm_username, vm_password))
 
     # Command to create a folder (you can modify this as needed)
     create_folder_command = "mkdir C:\\NewFolder"
-
+    
     # Execute the command remotely
     result = session.run_ps(create_folder_command)
     
