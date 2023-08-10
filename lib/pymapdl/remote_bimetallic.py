@@ -129,9 +129,9 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     #end of block
 
     # remote server details
-    remote_host = '192.168.12.228'  #need to change as per the target system
-    remote_username = 'hrithik'     #remote machine username
-    remote_password = 'Cadfem@2022' #remote machine password
+    remote_host = '40.76.196.62'  #need to change as per the target system
+    remote_username = 'pavan'     #remote machine username
+    remote_password = 'Cadfemindia@2023' #remote machine password
     # Specify the local path, path where pyfluent file will be saved in remote machine
     local_file_path = r'O:\Mixing_tank_py_web_app\lib\pymapdl\mixing_tank_pyfluent1.py'
     remote_file_path = r'C:\check\mixing_tank_pyfluent.py'
