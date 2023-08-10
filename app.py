@@ -96,7 +96,7 @@ def calculator():
             print("reaching save")
             firstfile.save(os.path.join(new_wdir_path, firstfile.filename))
             wkdir=os.path.join(new_wdir_path, firstfile.filename)
-            print("crossing save")
+            print(wdir)
             
             #All the inputs provided by the user are obtained and stored in variables
             my_boundary = float(request.form.get('boundary'))
@@ -111,6 +111,7 @@ def calculator():
             
         else:
             print("method is not post")
+        print("reaching myfile")
         file=open("\myfile.txt","r")
         #pyFluent(my_boundary,my_growth,my_cores,my_flow,my_meshsize,wkdir,new_wdir_path,out_len,in1_len,in2_len,imp_rad)
         post=file.readline()
@@ -118,7 +119,7 @@ def calculator():
         postproc[0]=post.rsplit(",")[0]
         postproc[1]=post.rsplit(",")[1]
         file.close()
-        
+        print(postproc[0])
         #shows that the run is complete
         print(RUN_COMPLETE)
 
