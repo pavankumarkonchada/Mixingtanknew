@@ -7,7 +7,7 @@ import os
 import subprocess
 import logging
 import requests
-import pywinrm
+import socket
 
 from requests.auth import HTTPBasicAuth
 print("Current working directory:", os.getcwd())
@@ -33,6 +33,12 @@ container_name = "mixstore" # container name in which images will be store in th
 print("Connection String:", connect_str)
 
 
+def check_rdp_connection(host, port):
+    try:
+        socket.create_connection((host, port), timeout=5)
+        return True
+    except (socket.timeout, ConnectionRefusedError):
+        return False
 
 def geomext(filename):
     if not "." in filename:
@@ -171,5 +177,12 @@ def calculator():
                            C111=in2_len,
                            C1111=imp_rad)
 if __name__ == '__main__':
+    vm_ip = "your_vm_ip"
+    rdp_port = 3389
+    is_reachable = check_rdp_connection(vm_ip, rdp_port)
     
+    if is_reachable:
+        print("VM is reachable over RDP.")
+    else:
+        print("Unable to connect to VM over RDP.")    
     app.run(host='0.0.0.0',debug=True)    
