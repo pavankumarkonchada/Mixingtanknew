@@ -48,8 +48,26 @@ def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):
 
 @app.route("/", methods=['POST', 'GET'])
 
+def open_remote_folder():
+    try:
+        remote_ip = "40.76.196.62"
+        remote_username = "pavan"
+        remote_password = "Cadfemindia@2023"
+        folder_path = request.json.get('C:\\checkfolder')  # Provide the remote folder path
+
+        # Create the command to open the folder using explorer
+        open_command = f'explorer.exe \\\\{remote_ip}\\{folder_path.replace("/", "\\")}'
+
+        # Run the command using subprocess
+        subprocess.run(['cmd', '/c', open_command], shell=True)
+
+        return jsonify({'message': f'Remote folder {folder_path} opened successfully.'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+        
 def calculator():  
     
+   
     # These are the default values that are shown in the website in place of the variables to be entered
     my_file='folder'
     my_boundary = 4
