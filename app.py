@@ -66,10 +66,10 @@ def calculator():
     wkdir= ''
 
     if request.method == 'POST' :
-        return "<h1 style='color:red'>Entering method</h1>"
+        
         #The location where the inputs have to be stored is obtained from the user, folder with same name is created
         path = os.getcwd()
-
+        return "<h1 style='color:red'>crossing getcwd {{path}}</h1>"
         string=request.form["folder"]
         new_wdir_path = os.path.join(path,string)
         if not os.path.exists(new_wdir_path):
