@@ -1,7 +1,5 @@
 import os
-import numpy as np
-from ansys.fluent.core import launch_fluent
-import ansys.fluent.core as pyfluent
+
 import shutil
 import paramiko
 import subprocess
