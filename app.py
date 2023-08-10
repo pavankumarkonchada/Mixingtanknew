@@ -7,7 +7,7 @@ import os
 import subprocess
 import logging
 import requests
-import paramiko
+
 from requests.auth import HTTPBasicAuth
 print("Current working directory:", os.getcwd())
 
