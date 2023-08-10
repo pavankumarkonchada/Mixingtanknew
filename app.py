@@ -49,28 +49,7 @@ def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):
 
 @app.route("/", methods=['POST', 'GET'])
 
-def create_folder_route():
-    vm_ip = '40.76.196.62'
-    vm_username = 'pavan'
-    vm_password = 'Cadfemindia@2023'
-    
-    folder_name = request.form.get('C:\\Check1')  # Get the folder name from the request
-    
-    # SSH into the virtual machine
-   
-    
-    ssh = paramiko.SSHClient()
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(vm_ip, username=vm_username, password=vm_password)
-    print("Entered into the ")
-    # Execute the command to create the folder
-    command = f'mkdir /home/{vm_username}/{folder_name}'
-    stdin, stdout, stderr = ssh.exec_command(command)
-    
-    # Close the SSH connection
-    ssh.close()
-    
-    return f"Folder '{folder_name}' creation initiated on the virtual machine."
+
         
 def calculator():  
     
