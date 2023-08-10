@@ -192,17 +192,17 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     
     #The text file with results from fluent run is transfered from remote machine to local machine using sftp.get()
     remote_txt=r"C:\check\result.txt"
-    local_txt=r"O:\Mixing_tank_py_web_app\myfile.txt"
+    local_txt=r"\myfile.txt"
     sftp.get(remote_txt, local_txt)
 
     #Image of pressure contour is transfered from remote machine to local machine using sftp.get()
     remote_press=r"C:\check\pressure.png"
-    local_press=r"O:\Mixing_tank_py_web_app\static\pressure.png"
+    local_press=r"\static\pressure.png"
     sftp.get(remote_press, local_press)
 
     #Image of velocity plot is transfered from remote machine to local machine using sftp.get()
     remote_vel=r"C:\check\vel_plot.png"
-    local_vel=r"O:\Mixing_tank_py_web_app\static\vel_plot.png"
+    local_vel=r"\static\vel_plot.png"
     sftp.get(remote_vel, local_vel)
 
     #Image of q-criteria contour is transfered from remote machine to local machine using sftp.get()
