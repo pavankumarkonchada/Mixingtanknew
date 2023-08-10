@@ -2,6 +2,7 @@
 # Usage: pip install -r requirements.txt
 azure-storage-blob
 paramiko
+pywinrm
 
 
 # Flask Framework
