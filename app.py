@@ -93,9 +93,10 @@ def calculator():
                 return "<h1 style='color:red'>ERROR: invalid geometry extension!</h1>"
             
             #saves the user uploaded file to the user uploaded location
+            print("reaching save")
             firstfile.save(os.path.join(new_wdir_path, firstfile.filename))
             wkdir=os.path.join(new_wdir_path, firstfile.filename)
-            print(wdir)
+            print("crossing save")
             
             #All the inputs provided by the user are obtained and stored in variables
             my_boundary = float(request.form.get('boundary'))
