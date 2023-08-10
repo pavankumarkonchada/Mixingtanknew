@@ -69,12 +69,13 @@ def calculator():
         
         #The location where the inputs have to be stored is obtained from the user, folder with same name is created
         path = os.getcwd()
-        return "<h1 style='color:red'>crossing getcwd {{path}}</h1>"
+        
         string=request.form["folder"]
         new_wdir_path = os.path.join(path,string)
         if not os.path.exists(new_wdir_path):
             print("folder doesn't exist")
             os.mkdir(new_wdir_path)
+        return "<h1 style='color:red'>crossing getcwd {{path}}</h1>"
         #Prints the user input folder
         print(new_wdir_path)
         #prints the file name uploaded
