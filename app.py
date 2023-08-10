@@ -108,7 +108,7 @@ def calculator():
             in1_len= float(request.form.get('in1len'))
             in2_len= float(request.form.get('in2len'))
             imp_rad= float(request.form.get('impellerradius'))
-            
+            print(im_rad)
         else:
             print("method is not post")
         print("reaching myfile")
