@@ -75,7 +75,7 @@ def calculator():
         if not os.path.exists(new_wdir_path):
             print("folder doesn't exist")
             os.mkdir(new_wdir_path)
-        return "<h1 style='color:red'>crossing getcwd {{path}}</h1>"
+        #return "<h1 style='color:red'>crossing getcwd {{path}}</h1>"
         #Prints the user input folder
         print(new_wdir_path)
         #prints the file name uploaded
@@ -110,7 +110,7 @@ def calculator():
         else:
             print("method is not post")
         file=open("\myfile.txt","r")
-        pyFluent(my_boundary,my_growth,my_cores,my_flow,my_meshsize,wkdir,new_wdir_path,out_len,in1_len,in2_len,imp_rad)
+        #pyFluent(my_boundary,my_growth,my_cores,my_flow,my_meshsize,wkdir,new_wdir_path,out_len,in1_len,in2_len,imp_rad)
         post=file.readline()
         postproc=[0,0]
         postproc[0]=post.rsplit(",")[0]
@@ -129,14 +129,14 @@ def calculator():
     flag = 1
     flag2= 1
     return render_template('inputpage.html',
-                           Flag = flag,
+                           Flag = 0,
                            SolveStatus='Solved',
                            L2=my_boundary,
                            t2=my_growth,
                            E21=my_cores,
                            E22=my_flow,
                            c21=my_meshsize,
-                           Flag2=flag2,
+                           Flag2=0,
                            ip=inlet_press,
                            ws=shear_int,
                            C1=out_len,
