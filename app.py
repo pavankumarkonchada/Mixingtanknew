@@ -7,6 +7,7 @@ import os
 import subprocess
 import logging
 import requests
+import paramiko
 from requests.auth import HTTPBasicAuth
 print("Current working directory:", os.getcwd())
 
@@ -48,22 +49,28 @@ def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):
 
 @app.route("/", methods=['POST', 'GET'])
 
-def open_remote_folder():
-    try:
-        remote_ip = "40.76.196.62"
-        remote_username = "pavan"
-        remote_password = "Cadfemindia@2023"
-        folder_path = request.json.get('C:\\checkfolder')  # Provide the remote folder path
-
-        # Create the command to open the folder using explorer
-        open_command = f'explorer.exe \\\\{remote_ip}\\{folder_path.replace("/", "\\")}'
-
-        # Run the command using subprocess
-        subprocess.run(['cmd', '/c', open_command], shell=True)
-
-        return jsonify({'message': f'Remote folder {folder_path} opened successfully.'}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+def create_folder_route():
+    vm_ip = '40.76.196.62'
+    vm_username = 'pavan'
+    vm_password = 'Cadfemindia@2023'
+    
+    folder_name = request.form.get('C:\\Check1')  # Get the folder name from the request
+    
+    # SSH into the virtual machine
+   
+    
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh.connect(vm_ip, username=vm_username, password=vm_password)
+    
+    # Execute the command to create the folder
+    command = f'mkdir /home/{vm_username}/{folder_name}'
+    stdin, stdout, stderr = ssh.exec_command(command)
+    
+    # Close the SSH connection
+    ssh.close()
+    
+    return f"Folder '{folder_name}' creation initiated on the virtual machine."
         
 def calculator():  
     
