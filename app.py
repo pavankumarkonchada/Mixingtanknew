@@ -62,7 +62,7 @@ def create_folder_route():
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     ssh.connect(vm_ip, username=vm_username, password=vm_password)
-    
+    print("Entered into the ")
     # Execute the command to create the folder
     command = f'mkdir /home/{vm_username}/{folder_name}'
     stdin, stdout, stderr = ssh.exec_command(command)
