@@ -80,30 +80,7 @@ def calculator():
         if not os.path.exists(new_wdir_path):
             print("folder doesn't exist")
             os.mkdir(new_wdir_path)
-        #return "<h1 style='color:red'>crossing getcwd {{path}}</h1>"
-
-        # remote server details
-        remote_host = '40.76.196.62' #need to change as per the target system
-        remote_username = 'pavan'
-        remote_password = 'Cadfemindia@2023'
-        local_file_path=r"\fluent_meshing.wbjn"
-        remote_file_path=r"C:\check\fluent_meshing.wbjn"
-        
-
-        ssh = paramiko.SSHClient()
-        paramiko.common.logging.basicConfig(level=paramiko.common.DEBUG)
-        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(remote_host, username=remote_username, password=remote_password)
-
-        # Transfer the local Python file,geometry file,workbench journal file, spaceclaim script to the remote server using sftp
-        sftp = ssh.open_sftp()
-        sftp.put(local_file_path, remote_file_path)
-        sftp.close()
-        ssh.close()
-
-
-
-        
+        #return "<h1 style='color:red'>crossing getcwd {{path}}</h1>"      
         #Prints the user input folder
         print(new_wdir_path)
         #prints the file name uploaded
