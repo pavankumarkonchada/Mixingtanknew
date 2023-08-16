@@ -33,12 +33,6 @@ container_name = "mixstore" # container name in which images will be store in th
 print("Connection String:", connect_str)
 
 
-def check_rdp_connection(host, port):
-    try:
-        socket.create_connection((host, port), timeout=5)
-        return True
-    except (socket.timeout, ConnectionRefusedError):
-        return False
 
 def geomext(filename):
     if not "." in filename:
@@ -55,25 +49,25 @@ def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):
 
 
 @app.route("/", methods=['POST', 'GET'])
-def create_folder():
-    # Configuration for the Windows VM
-    vm_ip = os.environ.get('VM_IP')
-    vm_username = os.environ.get('VM_USERNAME')
-    vm_password = os.environ.get('VM_PASSWORD')
-    print("eneterd")
-    # Connect to the Windows VM
-    session = pywinrm.Session(vm_ip, auth=(vm_username, vm_password))
 
-    # Command to create a folder (you can modify this as needed)
-    create_folder_command = "mkdir C:\\NewFolder"
+def index():
+    vm_ip = "20.163.248.81"  # Replace with the actual IP address of your Azure VM
+    response = ping_vm(vm_ip)
     
-    # Execute the command remotely
-    result = session.run_ps(create_folder_command)
-    
-    if result.status_code == 0:
-        return "Folder created successfully."
-    else:
-        return "Failed to create folder."
+    return render_template('index.html', response=response)
+
+def ping_vm(vm_ip):
+    try:
+        result = subprocess.run(["ping", "-n", "4", vm_ip], capture_output=True, text=True, timeout=10)
+        output = result.stdout
+        if "Received = 0" in output:
+            return "VM is unreachable"
+        else:
+            return "VM is reachable"
+    except subprocess.TimeoutExpired:
+        return "Ping request timed out"
+    except Exception as e:
+        return f"Error: {str(e)}"
 
         
 def calculator():  
@@ -94,7 +88,7 @@ def calculator():
     shear_int=0.   
     image = ''
     wkdir= ''
-
+    
     if request.method == 'POST' :
         
         #The location where the inputs have to be stored is obtained from the user, folder with same name is created
