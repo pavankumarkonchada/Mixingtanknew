@@ -3,7 +3,7 @@
 azure-storage-blob
 paramiko
 pywinrm
-socket
+
 
 
 # Flask Framework
