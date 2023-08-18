@@ -2,7 +2,7 @@ import os
 import shutil
 import paramiko
 import subprocess
-import git
+#import git
 
 # code works by creating a copy of all the pre-existing script files present in their respective places and replaces the user input variables in the required places,
 # this is then transfered to the remote machine and the files are executed in the remote location
@@ -140,13 +140,13 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     print("crossing the getenv function")
     app_service_destination = app_service_path
     repo_path = 'path/to/temp/repo'
-    git.Repo.clone_from(repo_url, repo_path)
+    #git.Repo.clone_from(repo_url, repo_path)
     print("crossing the git.repo function")
     source_file_path = os.path.join(repo_path, file_path)
     print("crossing the path join function")
     destination_file_path = os.path.join(app_service_destination, os.path.basename(file_path))
     print("crossing the second path.join function")
-    shutil.copy(source_file_path, destination_file_path)
+    #shutil.copy(source_file_path, destination_file_path)
     print("crossing the github to app instance shutil function")
 
     
