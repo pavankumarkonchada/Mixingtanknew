@@ -80,9 +80,9 @@ def index():
     input_str1 = r"C:\check\geom1.scdoc"
     input_str2 = "8"
     input_str3 = "1.2"
-    vm_ip = '20.163.248.81:3389'
-    vm_username = 'pavan'
-    vm_password = 'Cadfemindia@2023'
+    #vm_ip = '20.163.248.81:3389'
+    #vm_username = 'pavan'
+    #vm_password = 'Cadfemindia@2023'
 
     blob_service_client = BlobServiceClient(account_url=f"https://{account_name}.blob.core.windows.net", credential=account_key)
     blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
