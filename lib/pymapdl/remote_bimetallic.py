@@ -29,11 +29,13 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     remote_file_path_geom2 = "r"+'"'+r'C:\check\geom.scdoc'+'"'
 
     #The geometry file is saved in this location after the modifications have been done as per the spaceclaim script
+    
     geom_dst2="r"+'"'+r"C:\check\geom1.scdoc"+'"'
 
 
 
     #making a copy and replacing variables with values given by user in pyfluent file
+    
     original = r'\lib\pymapdl\mixing_tank_pyfluent.py'
     target = r'\lib\pymapdl\mixing_tank_pyfluent1.py'
     #shutil simply makes a copy at the target location
@@ -45,27 +47,27 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     variable_str={'import_filename':geom_dst2}
     variable_int={'total_no_of_layers':int(boundarylayers_auto),'process_count':int(noofcores_auto)}
     #The pyfluent file is opened in read mode 
-    file=open(file_path, 'rt')
+    #file=open(file_path, 'rt')
     #the contents of the pyfluent file are stored in the variable file_contents
-    file_contents=file.read()
+    #file_contents=file.read()
     #the text which needs to be swapped out in the pyfluent file is swapped
-    for variable,value in variable_values.items():
-        file_contents = file_contents.replace(variable, str(value))
+    #for variable,value in variable_values.items():
+    #    file_contents = file_contents.replace(variable, str(value))
 
-    for variable,value in variable_int.items():
-        file_contents = file_contents.replace(variable, str(value))
+    #for variable,value in variable_int.items():
+    #    file_contents = file_contents.replace(variable, str(value))
 
 
-    for variable,value in variable_str.items():
-        file_contents = file_contents.replace(variable,str(value))
+    #for variable,value in variable_str.items():
+    #    file_contents = file_contents.replace(variable,str(value))
     #file opened in read mode is closed
-    file.close()
+    #file.close()
     #the file is opened in write mode
-    file=open(file_path, 'wt')
+    #file=open(file_path, 'wt')
     #the modified contects stored in the variable file_contents is written to the file
-    file.write(file_contents)
+    #file.write(file_contents)
     #file opened in write mode is closed
-    file.close()
+    #file.close()
     #end of block
 
 
@@ -80,23 +82,23 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     variable_string={'filename':remote_file_path_geom2, 'dest':geom_dst2}
     variable_number={'outlet_length':out_len,'inlet2_length':in2_len,'inlet1_length':in1_len,'Impeller_radius':imp_rad}
     #The pyfluent file is opened in read mode 
-    file_sc=open(file_path_sc, 'rt')
+    #file_sc=open(file_path_sc, 'rt')
     #the contents of the spaceclaim script are stored in the variable file_contents_sc
-    file_contents_sc=file_sc.read()
+    #file_contents_sc=file_sc.read()
     #the text which needs to be swapped out in the spaceclaim script is swapped
-    for variable,value in variable_string.items():
-        file_contents_sc = file_contents_sc.replace(variable, str(value))
+    #for variable,value in variable_string.items():
+    #    file_contents_sc = file_contents_sc.replace(variable, str(value))
 
-    for variable,value in variable_number.items():
-        file_contents_sc = file_contents_sc.replace(variable, str(value))
+    #for variable,value in variable_number.items():
+    #    file_contents_sc = file_contents_sc.replace(variable, str(value))
     #file opened in read mode is closed
-    file_sc.close()
+    #file_sc.close()
     #the file is opened in write mode
-    file_sc=open(file_path_sc, 'wt')
+    #file_sc=open(file_path_sc, 'wt')
     #the modified contects stored in the variable file_contents_sc is written to the file
-    file_sc.write(file_contents_sc)
+    #file_sc.write(file_contents_sc)
     #file opened in write mode is closed
-    file_sc.close()
+    #file_sc.close()
     #end of block
 
 
@@ -111,24 +113,24 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     #the places where the text on the workbench journal needs to be swapped out with user input is stored in dictionaries
     variable_runwb={'journal_loc':remote_file_path_runwb}
     #The workbench journal is opened in read mode 
-    file_runwb=open(file_path_runwb, 'rt')
+    #file_runwb=open(file_path_runwb, 'rt')
     #the contents of the spaceclaim script are stored in the variable file_contents_runwb
-    file_contents_runwb=file_runwb.read()
+    #file_contents_runwb=file_runwb.read()
     #the text which needs to be swapped out in the workbench journal is swapped
-    for variable,value in variable_runwb.items():
-        file_contents_runwb = file_contents_runwb.replace(variable, str(value))
+    #for variable,value in variable_runwb.items():
+    #    file_contents_runwb = file_contents_runwb.replace(variable, str(value))
     #file opened in read mode is closed
-    file_runwb.close()
+    #file_runwb.close()
     #the file is opened in write mode
-    file_runwb=open(file_path_runwb, 'wt')
+    #file_runwb=open(file_path_runwb, 'wt')
     #the modified contects stored in the variable file_contents_runwb is written to the file
-    file_runwb.write(file_contents_runwb)
+    #file_runwb.write(file_contents_runwb)
     #file opened in write mode is closed
-    file_runwb.close()
+    #file_runwb.close()
     #end of block
 
     # remote server details
-    remote_host = '40.76.196.62'  #need to change as per the target system
+    remote_host = '20.163.248.81'  #need to change as per the target system
     remote_username = 'pavan'     #remote machine username
     remote_password = 'Cadfemindia@2023' #remote machine password
     # Specify the local path, path where pyfluent file will be saved in remote machine
@@ -167,9 +169,9 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     #the cxlayout file is stored in C under username folder everytime one uses fluent. It stores information regarding the workspace layout
     #This is needed as fluent changes to tab switching layout by default when using pyfluent and default workspace layout must be enforced each time
     #this will be tricky during remote execution, where we do not know the username in the target_layout, will have to give a predetermined username and use sftp.put()
-    original_layout = r'\fluent_layout\Default\.cxlayout.ini'
-    target_layout = r'C:\Users\pavan\.cxlayout.ini'
-    shutil.copyfile(original_layout, target_layout)
+    #original_layout = r'\fluent_layout\Default\.cxlayout.ini'
+    #target_layout = r'C:\Users\pavan\.cxlayout.ini'
+    #shutil.copyfile(original_layout, target_layout)
 
     #printing to confirm if code is being read
     print("Files have been copied successfully")
@@ -179,36 +181,36 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     wb_journal_path=r'C:\check\fluent_meshing.wbjn'
     
     #The command to run the workbench journal is defined as a shell command and run using subprocess.call()
-    command = f'"{workbench_path}" -B -R "{wb_journal_path}"'
+    #command = f'"{workbench_path}" -B -R "{wb_journal_path}"'
     #subprocess.call() is used instead of subprocess.Popen() as the former waits for the command to finish executing before moving on to the next line while the latter doesn't    
-    subprocess.call(command, shell=True)
+    #subprocess.call(command, shell=True)
    
     #if the geometry is present in the required location, the pyfluent code is run
-    if os.path.exists(r"C:\check\geom1.scdoc"):
+    #if os.path.exists(r"C:\check\geom1.scdoc"):
         #commands to change working directory and run the pyfluent code are written as shell commands and executed using subprocess.call()
-        command = r"cd C:\check&&python C:\check\mixing_tank_pyfluent.py" 
+    #    command = r"cd C:\check&&python C:\check\mixing_tank_pyfluent.py" 
         #subprocess.call() is used instead of subprocess.Popen() as the former waits for the command to finish executing before moving on to the next line while the latter doesn't
-        subprocess.call(command, shell=True)
+    #    subprocess.call(command, shell=True)
     
     #The text file with results from fluent run is transfered from remote machine to local machine using sftp.get()
     remote_txt=r"C:\check\result.txt"
     local_txt=r"\myfile.txt"
-    sftp.get(remote_txt, local_txt)
+    #sftp.get(remote_txt, local_txt)
 
     #Image of pressure contour is transfered from remote machine to local machine using sftp.get()
     remote_press=r"C:\check\pressure.png"
     local_press=r"\static\pressure.png"
-    sftp.get(remote_press, local_press)
+    #sftp.get(remote_press, local_press)
 
     #Image of velocity plot is transfered from remote machine to local machine using sftp.get()
     remote_vel=r"C:\check\vel_plot.png"
     local_vel=r"\static\vel_plot.png"
-    sftp.get(remote_vel, local_vel)
+    #sftp.get(remote_vel, local_vel)
 
     #Image of q-criteria contour is transfered from remote machine to local machine using sftp.get()
     remote_press=r"C:\check\Q-criteria.png" 
     local_press=r"\static\Q-criteria.png"
-    sftp.get(remote_press, local_press)
+    #sftp.get(remote_press, local_press)
     #The sftp channel is closed
     sftp.close()
     #the ssh instance is closed
