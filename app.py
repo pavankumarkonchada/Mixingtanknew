@@ -8,7 +8,6 @@ import subprocess
 import logging
 import requests
 import socket
-
 from requests.auth import HTTPBasicAuth
 print("Current working directory:", os.getcwd())
 
@@ -22,7 +21,7 @@ subfolder_path = os.path.join(lib_path, 'pymapdl')
 sys.path.append(subfolder_path)
 
 from lib.constants import *
-
+import lib.pymapdl.remote_bimetallic
 
 app = Flask(__name__)
 app.config["DEBUG"] = False
