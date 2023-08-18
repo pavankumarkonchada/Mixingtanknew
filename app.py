@@ -108,7 +108,7 @@ def calculator():
         #checks if the file uploaded has a valid filename,valid extension or not
         if request.files:
             firstfile=request.files["geomfile"]
-            print("entering request.files if condition")
+            #it is entering this condition
             if firstfile.filename=="":
                 print("file needs to have valid name")
                 return "<h1 style='color:red'>ERROR:invalid filename!</h1>"
@@ -122,7 +122,7 @@ def calculator():
 #            firstfile.save(os.path.join(new_wdir_path, firstfile.filename))
 #            wkdir=os.path.join(new_wdir_path, firstfile.filename)
 #            print("crossing save")
-            
+            print("reaching before variable assignment")
             #All the inputs provided by the user are obtained and stored in variables
             my_boundary = float(request.form.get('boundary'))
             my_growth = float(request.form.get('growth'))
@@ -133,7 +133,7 @@ def calculator():
             in1_len= float(request.form.get('in1len'))
             in2_len= float(request.form.get('in2len'))
             imp_rad= float(request.form.get('impellerradius'))
-            print(im_rad)
+            print(imp_rad)
         else:
             print("method is not post")
         print("reaching myfile")
