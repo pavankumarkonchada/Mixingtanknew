@@ -155,7 +155,7 @@ def calculator():
         #reaching this point
         #file=open("\myfile.txt","r")
         print("it is opening the file to read")
-        pyFluent(my_boundary,my_growth,my_cores,my_flow,my_meshsize,wkdir,new_wdir_path,out_len,in1_len,in2_len,imp_rad)
+        #pyFluent(my_boundary,my_growth,my_cores,my_flow,my_meshsize,wkdir,new_wdir_path,out_len,in1_len,in2_len,imp_rad)
         post=file.readline()
         postproc=[0,0]
         postproc[0]=post.rsplit(",")[0]
