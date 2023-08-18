@@ -35,12 +35,12 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
 
 
     #making a copy and replacing variables with values given by user in pyfluent file
-    
+    print("entering remote bymetallic till before shutil")
     original = r'\lib\pymapdl\mixing_tank_pyfluent.py'
     target = r'\lib\pymapdl\mixing_tank_pyfluent1.py'
     #shutil simply makes a copy at the target location
     shutil.copyfile(original, target)
-
+    print("crossing shutil function")
     file_path= r"\lib\pymapdl\mixing_tank_pyfluent1.py"
     #the places where the text on the pyfluent file needs to be swapped out with user input is stored in dictionaries
     variable_values={'max_size':float(meshsize_auto),'growth_rate_bl':float(growthrate_auto),'in_vel':float(waterflowrate_auto)}
