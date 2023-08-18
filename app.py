@@ -51,7 +51,7 @@ def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):
 @app.route("/", methods=['POST', 'GET'])
 
 def index():
-    vm_ip = "20.163.248.81"  # Replace with the actual IP address of your Azure VM
+    vm_ip = "20.163.248.81:3389"  # Replace with the actual IP address of your Azure VM
     response = ping_vm(vm_ip)
     
     return render_template('index.html', response=response)
