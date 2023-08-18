@@ -76,22 +76,22 @@ def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):
 #    except Exception as e:
 #        return f"Error: {str(e)}"
 
-def index():
-    input_str1 = r"C:\check\geom1.scdoc"
-    input_str2 = "8"
-    input_str3 = "1.2"
-    #vm_ip = '20.163.248.81:3389'
-    #vm_username = 'pavan'
-    #vm_password = 'Cadfemindia@2023'
+#def index():
+#    input_str1 = r"C:\check\geom1.scdoc"
+#    input_str2 = "8"
+#    input_str3 = "1.2"
+#    #vm_ip = '20.163.248.81:3389'
+#    #vm_username = 'pavan'
+#    #vm_password = 'Cadfemindia@2023'
 
-    blob_service_client = BlobServiceClient(account_url=f"https://{account_name}.blob.core.windows.net", credential=account_key)
-    blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
+#    blob_service_client = BlobServiceClient(account_url=f"https://{account_name}.blob.core.windows.net", credential=account_key)
+#    blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
 
-    current_content = blob_client.download_blob().readall().decode('utf-8')
+#    current_content = blob_client.download_blob().readall().decode('utf-8')
 
     # Replace the old input strings with the new ones
-    updated_content = current_content.replace('import_filename', input_str1).replace('process_count', input_str2).replace('max_size', input_str3)
-    blob_client.upload_blob(updated_content, overwrite=True)
+#    updated_content = current_content.replace('import_filename', input_str1).replace('process_count', input_str2).replace('max_size', input_str3)
+#    blob_client.upload_blob(updated_content, overwrite=True)
     #file_name = "remote_bimetallic.py"
     #vm_location = r"C\check"  # Location on the VM to copy the file to
 
@@ -113,7 +113,7 @@ def index():
 
     #ssh_client.close()
 
-    return render_template('index.html')
+#    return render_template('index.html')
 
         
 def calculator():  
