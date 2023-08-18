@@ -49,20 +49,6 @@ def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):
     print("entering the function")
     lib.pymapdl.remote_bimetallic.solve_mix(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp)
 
-def index():
-    input_str1 = r"C:\check\geom1.scdoc"
-    input_str2 = "8"
-    input_str3 = "1.2"
-    blob_service_client = BlobServiceClient(account_url=f"https://{account_name}.blob.core.windows.net", credential=account_key)
-    blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
-
-    current_content = blob_client.download_blob().readall().decode('utf-8')
-
-    # Replace the old input strings with the new ones
-    updated_content = current_content.replace('import_filename', input_str1).replace('process_count', input_str2).replace('max_size', input_str3)
-    blob_client.upload_blob(updated_content, overwrite=True)
-
-    return render_template('index.html')
 
 
 @app.route("/", methods=['POST', 'GET'])
@@ -85,6 +71,21 @@ def index():
 #        return "Ping request timed out"
 #    except Exception as e:
 #        return f"Error: {str(e)}"
+
+def index():
+    input_str1 = r"C:\check\geom1.scdoc"
+    input_str2 = "8"
+    input_str3 = "1.2"
+    blob_service_client = BlobServiceClient(account_url=f"https://{account_name}.blob.core.windows.net", credential=account_key)
+    blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
+
+    current_content = blob_client.download_blob().readall().decode('utf-8')
+
+    # Replace the old input strings with the new ones
+    updated_content = current_content.replace('import_filename', input_str1).replace('process_count', input_str2).replace('max_size', input_str3)
+    blob_client.upload_blob(updated_content, overwrite=True)
+
+    return render_template('index.html')
 
         
 def calculator():  
