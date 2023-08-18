@@ -40,8 +40,8 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     original = r'\lib\pymapdl\mixing_tank_pyfluent.py'
     target = r'\lib\pymapdl\mixing_tank_pyfluent1.py'
     #shutil simply makes a copy at the target location
-    shutil.copyfile(original, target)
-    print("crossing shutil function")
+    #shutil.copyfile(original, target)
+    #print("crossing shutil function")
     file_path= r"\lib\pymapdl\mixing_tank_pyfluent1.py"
     #the places where the text on the pyfluent file needs to be swapped out with user input is stored in dictionaries
     variable_values={'max_size':float(meshsize_auto),'growth_rate_bl':float(growthrate_auto),'in_vel':float(waterflowrate_auto)}
@@ -76,7 +76,7 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     original_sc = r'\spaceclaim_script1.py'
     target_sc = r'\spaceclaim_script2.py'
     #shutil simply makes a copy at the target location
-    shutil.copyfile(original_sc, target_sc)
+    #shutil.copyfile(original_sc, target_sc)
 
     file_path_sc= r"\spaceclaim_script2.py"
     #the places where the text on the spaceclaim script needs to be swapped out with user input is stored in dictionaries
@@ -107,7 +107,7 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     original_runwb = r'\run_wb1.py'
     target_runwb = r'\run_wb2.py'
     #shutil simply makes a copy at the target location
-    shutil.copyfile(original_runwb, target_runwb)
+    #shutil.copyfile(original_runwb, target_runwb)
 
     file_path_runwb= r"\run_wb2.py"
     remote_file_path_runwb="r"+'"'+r"C:\check\fluent_meshing.wbjn"+'"'
@@ -129,7 +129,7 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     #file opened in write mode is closed
     #file_runwb.close()
     #end of block
-
+    print("reaching till before ssh")
     # remote server details
     remote_host = '20.163.248.81'  #need to change as per the target system
     remote_username = 'pavan'     #remote machine username
@@ -156,7 +156,7 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     paramiko.common.logging.basicConfig(level=paramiko.common.DEBUG)
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     ssh.connect(remote_host, username=remote_username, password=remote_password)
-
+    print("SSH connection established")
     # Transfer the local Python file,geometry file,workbench journal file, spaceclaim script to the remote server using sftp
     #sftp channel is opened
     sftp = ssh.open_sftp()
