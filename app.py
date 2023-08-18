@@ -108,6 +108,7 @@ def calculator():
         #checks if the file uploaded has a valid filename,valid extension or not
         if request.files:
             firstfile=request.files["geomfile"]
+            print("entering request.files if condition")
             if firstfile.filename=="":
                 print("file needs to have valid name")
                 return "<h1 style='color:red'>ERROR:invalid filename!</h1>"
