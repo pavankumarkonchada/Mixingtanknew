@@ -14,6 +14,7 @@ print("Current working directory:", os.getcwd())
 log_file_path = os.path.join(os.getcwd(), 'app.log')
 logging.basicConfig(filename=log_file_path, level=logging.INFO)
 
+
 # Add the 'lib' folder to the Python path
 lib_path = os.path.join(os.path.dirname(__file__), 'lib')
 sys.path.append(lib_path)
