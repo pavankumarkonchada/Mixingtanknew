@@ -10,6 +10,8 @@ import requests
 import socket
 from requests.auth import HTTPBasicAuth
 import paramiko
+import azure.functions as func
+import logging
 print("Current working directory:", os.getcwd())
 
 log_file_path = os.path.join(os.getcwd(), 'app.log')
@@ -93,23 +95,23 @@ def index():
     file_name = "remote_bimetallic.py"
     vm_location = r"C\check"  # Location on the VM to copy the file to
 
-    blob_content = blob_client.download_blob().readall()
+    #blob_content = blob_client.download_blob().readall()
 
     # Save the blob's content to a local file
-    local_file_path = 'temp_file'
-    with open(local_file_path, 'wb') as f:
-        f.write(blob_content)
+    #local_file_path = 'temp_file'
+    #with open(local_file_path, 'wb') as f:
+    #    f.write(blob_content)
 
     # Use paramiko to run PowerShell commands on the Windows VM
-    ssh_client = paramiko.SSHClient()
-    ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh_client.connect(vm_ip, username=vm_username, password=vm_password)
+    #ssh_client = paramiko.SSHClient()
+    #ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    #ssh_client.connect(vm_ip, username=vm_username, password=vm_password)
         
     # Run PowerShell command to copy the file to the VM
-    powershell_command = f'Copy-Item "{local_file_path}" "{vm_location}"'
-    ssh_stdin, ssh_stdout, ssh_stderr = ssh_client.exec_command(f'powershell -command "{powershell_command}"')
+    #powershell_command = f'Copy-Item "{local_file_path}" "{vm_location}"'
+    #ssh_stdin, ssh_stdout, ssh_stderr = ssh_client.exec_command(f'powershell -command "{powershell_command}"')
 
-    ssh_client.close()
+    #ssh_client.close()
 
     return render_template('index.html')
 
