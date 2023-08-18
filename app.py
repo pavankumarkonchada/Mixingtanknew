@@ -44,6 +44,7 @@ def geomext(filename):
         return False
 
 def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):  
+    print("entering the function")
     lib.pymapdl.remote_bimetallic.solve_mix(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp)
 
 
@@ -122,7 +123,7 @@ def calculator():
 #            firstfile.save(os.path.join(new_wdir_path, firstfile.filename))
 #            wkdir=os.path.join(new_wdir_path, firstfile.filename)
 #            print("crossing save")
-            print("reaching before variable assignment")
+            
             #All the inputs provided by the user are obtained and stored in variables
             my_boundary = float(request.form.get('boundary'))
             my_growth = float(request.form.get('growth'))
@@ -133,11 +134,11 @@ def calculator():
             in1_len= float(request.form.get('in1len'))
             in2_len= float(request.form.get('in2len'))
             imp_rad= float(request.form.get('impellerradius'))
-            print(imp_rad)
         else:
             print("method is not post")
-        print("reaching myfile")
+        #reaching this point
         file=open("\myfile.txt","r")
+        print("it is opening the file to read")
         pyFluent(my_boundary,my_growth,my_cores,my_flow,my_meshsize,wkdir,new_wdir_path,out_len,in1_len,in2_len,imp_rad)
         post=file.readline()
         postproc=[0,0]
