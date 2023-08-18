@@ -137,7 +137,7 @@ def calculator():
         else:
             print("method is not post")
         #reaching this point
-        file=open("\myfile.txt","r")
+        #file=open("\myfile.txt","r")
         print("it is opening the file to read")
         pyFluent(my_boundary,my_growth,my_cores,my_flow,my_meshsize,wkdir,new_wdir_path,out_len,in1_len,in2_len,imp_rad)
         post=file.readline()
