@@ -4,7 +4,8 @@ azure-storage-blob
 paramiko
 pywinrm
 GitPython
-
+azure.functions
+logging
 
 # Flask Framework
 Flask>=2.0,<=2.3.2
