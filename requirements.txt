@@ -3,7 +3,6 @@
 azure-storage-blob
 paramiko
 pywinrm
-GitPython
 azure.functions
 logging
 
