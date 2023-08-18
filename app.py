@@ -24,7 +24,7 @@ from lib.constants import *
 import lib.pymapdl.remote_bimetallic
 
 app = Flask(__name__)
-app.config["DEBUG"] = False
+app.config["DEBUG"] = True
 cwd = os.getcwd()
 app.config["ALLOWED_EXT_GEOM"]=["STP","STL","SCDOC","X_T","STEP"]
 connect_str = f"DefaultEndpointsProtocol=https;AccountName=trailmixin;AccountKey=3SVrdfhrb+3zp8yJgMsvbBS7xACbuoSH/Mh+/Cz/eRUWVZH0mBYbaSMxqBfEeAcsmKbWMavId984+AStJrMV5g==;EndpointSuffix=core.windows.net" # retrieve the connection string from the environment variable
