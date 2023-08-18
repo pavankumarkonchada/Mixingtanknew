@@ -2,14 +2,14 @@ import os
 import shutil
 import paramiko
 import subprocess
+import git
 
 # code works by creating a copy of all the pre-existing script files present in their respective places and replaces the user input variables in the required places,
 # this is then transfered to the remote machine and the files are executed in the remote location
 # following this the result is stored in the form of contours and a text file
 # These are then transfered to the local machine and then integrated into the web app
-print("entering remote bymetallic")
 def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_auto,meshsize_auto,my_wdirnew,wd,out_len,in1_len,in2_len,imp_rad):
-    print("entering the solve_mix function")
+    #it is entering the function
     # variables required for the simulation are obtained from app.py
     boundarylayers_auto=boundarylayers_auto
     growthrate_auto=growthrate_auto
@@ -129,6 +129,8 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
     #file opened in write mode is closed
     #file_runwb.close()
     #end of block
+
+    #reaching till this point
     print("reaching till before ssh")
     # remote server details
     remote_host = '20.163.248.81'  #need to change as per the target system
