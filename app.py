@@ -50,24 +50,24 @@ def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):
 
 @app.route("/", methods=['POST', 'GET'])
 
-def index():
-    vm_ip = "20.163.248.81:3389"  # Replace with the actual IP address of your Azure VM
-    response = ping_vm(vm_ip)
+#def index():
+#    vm_ip = "20.163.248.81:3389"  # Replace with the actual IP address of your Azure VM
+#    response = ping_vm(vm_ip)
     
-    return render_template('index.html', response=response)
+#    return render_template('index.html', response=response)
 
-def ping_vm(vm_ip):
-    try:
-        result = subprocess.run(["ping", "-n", "4", vm_ip], capture_output=True, text=True, timeout=10)
-        output = result.stdout
-        if "Received = 0" in output:
-            return "VM is unreachable"
-        else:
-            return "VM is reachable"
-    except subprocess.TimeoutExpired:
-        return "Ping request timed out"
-    except Exception as e:
-        return f"Error: {str(e)}"
+#def ping_vm(vm_ip):
+#    try:
+#        result = subprocess.run(["ping", "-n", "4", vm_ip], capture_output=True, text=True, timeout=10)
+#        output = result.stdout
+#        if "Received = 0" in output:
+#            return "VM is unreachable"
+#        else:
+#            return "VM is reachable"
+#    except subprocess.TimeoutExpired:
+#        return "Ping request timed out"
+#    except Exception as e:
+#        return f"Error: {str(e)}"
 
         
 def calculator():  
@@ -117,10 +117,10 @@ def calculator():
                 return "<h1 style='color:red'>ERROR: invalid geometry extension!</h1>"
             
             #saves the user uploaded file to the user uploaded location
-            print("reaching save")
-            firstfile.save(os.path.join(new_wdir_path, firstfile.filename))
-            wkdir=os.path.join(new_wdir_path, firstfile.filename)
-            print("crossing save")
+#            print("reaching save")
+#            firstfile.save(os.path.join(new_wdir_path, firstfile.filename))
+#            wkdir=os.path.join(new_wdir_path, firstfile.filename)
+#            print("crossing save")
             
             #All the inputs provided by the user are obtained and stored in variables
             my_boundary = float(request.form.get('boundary'))
@@ -137,7 +137,7 @@ def calculator():
             print("method is not post")
         print("reaching myfile")
         file=open("\myfile.txt","r")
-        #pyFluent(my_boundary,my_growth,my_cores,my_flow,my_meshsize,wkdir,new_wdir_path,out_len,in1_len,in2_len,imp_rad)
+        pyFluent(my_boundary,my_growth,my_cores,my_flow,my_meshsize,wkdir,new_wdir_path,out_len,in1_len,in2_len,imp_rad)
         post=file.readline()
         postproc=[0,0]
         postproc[0]=post.rsplit(",")[0]
