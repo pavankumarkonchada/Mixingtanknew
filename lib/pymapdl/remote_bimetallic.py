@@ -132,6 +132,24 @@ def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_a
 
     #reaching till this point
     print("reaching till before ssh")
+
+    #trying to transfer the directory to the app instance
+    repo_url = 'https://https://github.com/pavankumarkonchada/Mixingtanknew.git'
+    file_path = 'lib/pymapdl/remote_bimetallic.py'
+    app_service_path = os.getenv('HOME')
+    print("crossing the getenv function")
+    app_service_destination = app_service_path
+    repo_path = 'path/to/temp/repo'
+    git.Repo.clone_from(repo_url, repo_path)
+    print("crossing the git.repo function")
+    source_file_path = os.path.join(repo_path, file_path)
+    print("crossing the path join function")
+    destination_file_path = os.path.join(app_service_destination, os.path.basename(file_path))
+    print("crossing the second path.join function")
+    shutil.copy(source_file_path, destination_file_path)
+    print("crossing the github to app instance shutil function")
+
+    
     # remote server details
     remote_host = '20.163.248.81'  #need to change as per the target system
     remote_username = 'pavan'     #remote machine username
