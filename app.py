@@ -9,6 +9,7 @@ import logging
 import requests
 import socket
 from requests.auth import HTTPBasicAuth
+import paramiko
 print("Current working directory:", os.getcwd())
 
 log_file_path = os.path.join(os.getcwd(), 'app.log')
