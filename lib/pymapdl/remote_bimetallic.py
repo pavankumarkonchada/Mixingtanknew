@@ -7,8 +7,9 @@ import subprocess
 # this is then transfered to the remote machine and the files are executed in the remote location
 # following this the result is stored in the form of contours and a text file
 # These are then transfered to the local machine and then integrated into the web app
-
+print("entering remote bymetallic")
 def solve_mix(boundarylayers_auto,growthrate_auto,noofcores_auto,waterflowrate_auto,meshsize_auto,my_wdirnew,wd,out_len,in1_len,in2_len,imp_rad):
+    print("entering the solve_mix function")
     # variables required for the simulation are obtained from app.py
     boundarylayers_auto=boundarylayers_auto
     growthrate_auto=growthrate_auto
