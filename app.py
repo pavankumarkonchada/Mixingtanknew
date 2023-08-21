@@ -113,7 +113,7 @@ def index():
 
     #ssh_client.close()
 
-#    return render_template('index.html')
+    return render_template('index.html')
 
         
 def calculator():  
