@@ -96,11 +96,11 @@ def index():
     vm_location = r"C\check"  # Location on the VM to copy the file to
 
     blob_content = blob_client.download_blob().readall()
-
+#code to transfer files to VM is working till this point
     # Save the blob's content to a local file
-    #local_file_path = 'temp_file'
-    #with open(local_file_path, 'wb') as f:
-    #    f.write(blob_content)
+    local_file_path = 'temp_file'
+    with open(local_file_path, 'wb') as f:
+        f.write(blob_content)
 
     # Use paramiko to run PowerShell commands on the Windows VM
     #ssh_client = paramiko.SSHClient()
