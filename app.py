@@ -9,7 +9,7 @@ import logging
 import requests
 import socket
 from requests.auth import HTTPBasicAuth
-#import paramiko
+import paramiko
 #import azure.functions as func
 #import logging
 print("Current working directory:", os.getcwd())
