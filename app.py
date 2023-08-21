@@ -80,9 +80,9 @@ def index():
     input_str1 = r"C:\check\geom1.scdoc"
     input_str2 = "8"
     input_str3 = "1.2"
-    #vm_ip = '20.163.248.81:3389'
-    #vm_username = 'pavan'
-    #vm_password = 'Cadfemindia@2023'
+    vm_ip = '20.163.248.81:3389'
+    vm_username = 'pavan'
+    vm_password = 'Cadfemindia@2023'
 
     blob_service_client = BlobServiceClient(account_url=f"https://{account_name}.blob.core.windows.net", credential=account_key)
     blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
@@ -92,10 +92,10 @@ def index():
     # Replace the old input strings with the new ones
     updated_content = current_content.replace('import_filename', input_str1).replace('process_count', input_str2).replace('max_size', input_str3)
     blob_client.upload_blob(updated_content, overwrite=True)
-    #file_name = "remote_bimetallic.py"
-    #vm_location = r"C\check"  # Location on the VM to copy the file to
+    file_name = "remote_bimetallic.py"
+    vm_location = r"C\check"  # Location on the VM to copy the file to
 
-    #blob_content = blob_client.download_blob().readall()
+    blob_content = blob_client.download_blob().readall()
 
     # Save the blob's content to a local file
     #local_file_path = 'temp_file'
