@@ -92,10 +92,10 @@ def index():
     # Replace the old input strings with the new ones
     updated_content = current_content.replace('import_filename', input_str1).replace('process_count', input_str2).replace('max_size', input_str3)
     blob_client.upload_blob(updated_content, overwrite=True)
-    file_name = "remote_bimetallic.py"
-    vm_location = r"C\check"  # Location on the VM to copy the file to
+    #file_name = "remote_bimetallic.py"
+    #vm_location = r"C\check"  # Location on the VM to copy the file to
 
-    blob_content = blob_client.download_blob().readall()
+    #blob_content = blob_client.download_blob().readall()
 
     # Save the blob's content to a local file
     #local_file_path = 'temp_file'
