@@ -80,7 +80,7 @@ def index():
     input_str1 = r"C:\check\geom1.scdoc"
     input_str2 = "8"
     input_str3 = "1.2"
-    vm_ip = '20.163.248.81:3389'
+    vm_ip = '20.163.248.81'
     vm_username = 'pavan'
     vm_password = 'Cadfemindia@2023'
 
