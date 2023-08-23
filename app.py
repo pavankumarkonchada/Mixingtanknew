@@ -15,9 +15,9 @@ azure_vm_password = "Cadfemindia@2023"
 def transfer_file():
     try:
         # Download the file from GitHub
-        headers = {"Authorization": f"Bearer {github_pat}"}
+        #headers = {"Authorization": f"Bearer {github_pat}"}
         github_api_url = f"https://api.github.com/repos/pavankumarkonchada/mixingtanknew/contents/lib/pymapdl/mixing_tank_pyfluent.py"
-        response = requests.get(github_api_url, headers=headers)
+        response = requests.get(github_api_url)
         content = response.json()
 
         file_content = content["content"]
