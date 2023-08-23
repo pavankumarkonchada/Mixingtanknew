@@ -75,7 +75,7 @@ def process_file():
         
         # Modify the content based on user input
         modified_content = github_file_content.replace('max_size',str(input_value))
-        
+        print("Runninga adfajspdfj kajsfpaksdjf")
         # Send the modified content to the VM through API
         vm_api_url = 'http://20.163.248.81:3389/api/endpoint'
         vm_api_data = {'content': modified_content}
