@@ -69,7 +69,7 @@ def process_file():
         input_value = request.form.get('input_field')
         
         # Read the file from the GitHub repository
-        github_file_url = 'https://raw.githubusercontent.com/username/repository/main/file.txt'
+        github_file_url = 'https://github.com/pavankumarkonchada/Mixingtanknew/blob/main/lib/pymapdl/mixing_tank_pyfluent.py'
         response = requests.get(github_file_url)
         github_file_content = response.text
         
