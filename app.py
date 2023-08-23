@@ -58,10 +58,33 @@ def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):
 @app.route("/", methods=['POST', 'GET'])
 
 #def index():
-#    vm_ip = "20.163.248.81:3389"  # Replace with the actual IP address of your Azure VM
-#    response = ping_vm(vm_ip)
-    
-#    return render_template('index.html', response=response)
+    #vm_ip = "20.163.248.81:3389"  # Replace with the actual IP address of your Azure VM
+    #response = ping_vm(vm_ip)
+   
+    #return render_template('index.html', response=response)
+
+def process_file():
+    try:
+        # Read user input from the HTML form
+        input_value = request.form.get('input_field')
+        
+        # Read the file from the GitHub repository
+        github_file_url = 'https://raw.githubusercontent.com/username/repository/main/file.txt'
+        response = requests.get(github_file_url)
+        github_file_content = response.text
+        
+        # Modify the content based on user input
+        modified_content = github_file_content.replace('placeholder', input_value)
+        
+        # Send the modified content to the VM through API
+        vm_api_url = 'http://vm-ip-address:port/api/endpoint'
+        vm_api_data = {'content': modified_content}
+        response = requests.post(vm_api_url, json=vm_api_data)
+        
+        return jsonify({"status": "success", "message": "File modified and sent to VM successfully!"})
+
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)})
 
 #def ping_vm(vm_ip):
 #    try:
