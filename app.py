@@ -85,25 +85,8 @@ def process_file():
 
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
-
-#def ping_vm(vm_ip):
-#    try:
-#        result = subprocess.run(["ping", "-n", "4", vm_ip], capture_output=True, text=True, timeout=10)
-#        output = result.stdout
-#        if "Received = 0" in output:
-#            return "VM is unreachable"
-#        else:
-#            return "VM is reachable"
-#    except subprocess.TimeoutExpired:
-#        return "Ping request timed out"
-#    except Exception as e:
-#        return f"Error: {str(e)}"
-
-
-            
+         
 def calculator():  
-    
-   
     # These are the default values that are shown in the website in place of the variables to be entered
     my_file='folder'
     my_boundary = 4
