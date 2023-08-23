@@ -63,7 +63,7 @@ def transfer_files():
     #ssh_client = paramiko.SSHClient()
     #ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     #ssh_client.connect(vm_ip, username=ssh_username, password=ssh_password)
-    return jsonify({"message": "Files transferred successfully."})
+    
     # Download files from Blob Storage and transfer to VM
     
 
@@ -91,6 +91,7 @@ def transfer_files():
 
 def start_transfer():
     transfer_files()
+    return jsonify({"message": "Files transferred successfully."})
             
 def calculator():  
     
