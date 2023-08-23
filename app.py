@@ -12,7 +12,7 @@ azure_vm_ip = "20.163.248.81"
 azure_vm_username = "pavan"
 azure_vm_password = "Cadfemindia@2023"
 
-@app.route("/transfer", methods=["GET"])
+@app.route("/", methods=["GET"])
 def transfer_file():
     try:
         # Download the file from GitHub
