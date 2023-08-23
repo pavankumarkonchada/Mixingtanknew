@@ -31,15 +31,7 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 cwd = os.getcwd()
 app.config["ALLOWED_EXT_GEOM"]=["STP","STL","SCDOC","X_T","STEP"]
-connect_str = f"DefaultEndpointsProtocol=https;AccountName=trailmixin;AccountKey=3SVrdfhrb+3zp8yJgMsvbBS7xACbuoSH/Mh+/Cz/eRUWVZH0mBYbaSMxqBfEeAcsmKbWMavId984+AStJrMV5g==;EndpointSuffix=core.windows.net" # retrieve the connection string from the environment variable
-container_name = "mixstore" # container name in which images will be store in the storage account
-print("Connection String:", connect_str)
 
-account_name = 'cadfemstorage'
-account_key = '2Q+8yku1CsKNxavljdSnybnyviX1scDZrLgggdnk54R3i7V7KVxNv2YVDXvuSLZy9TeC03KmeIQb+AStelJlnA=='
-container_name = 'new-container'
-blob_name = 'mixing_tank_pyfluent.py'
-blob_name2 = 'mixing_tank_pyfluent1.py'
 
 def geomext(filename):
     if not "." in filename:
@@ -54,6 +46,35 @@ def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):
     print("entering the function")
     lib.pymapdl.remote_bimetallic.solve_mix(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp)
 
+# Azure Blob Storage credentials
+blob_service_client = BlobServiceClient.from_connection_string('DefaultEndpointsProtocol=https;AccountName=cadfemstorage;AccountKey=2Q+8yku1CsKNxavljdSnybnyviX1scDZrLgggdnk54R3i7V7KVxNv2YVDXvuSLZy9TeC03KmeIQb+AStelJlnA==;EndpointSuffix=core.windows.net')
+container_name = 'new-container'
+
+# SSH credentials
+vm_ip = '20.163.248.81:3389'
+ssh_username = 'pavan'
+ssh_password = 'Cadfemindia@2023'
+
+def transfer_files():
+    # Connect to Azure Blob Storage
+    container_client = blob_service_client.get_container_client(container_name)
+    
+    # Connect to VM using SSH
+    ssh_client = paramiko.SSHClient()
+    ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh_client.connect(vm_ip, username=ssh_username, password=ssh_password)
+    
+    # Download files from Blob Storage and transfer to VM
+    for blob in container_client.list_blobs():
+        blob_data = blob_client.download_blob(blob)
+        local_filename = blob.name
+        remote_path = 'C:/check/' + local_filename
+        
+        # Upload the file using SFTP
+        sftp = ssh_client.open_sftp()
+        sftp.putfo(blob_data, remote_path)
+        sftp.close()
+    ssh_client.close()
 
 
 @app.route("/", methods=['POST', 'GET'])
@@ -77,46 +98,9 @@ def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):
 #    except Exception as e:
 #        return f"Error: {str(e)}"
 
-def index():
-    input_str1 = r"C:\check\geom1.scdoc"
-    input_str2 = "8"
-    input_str3 = "1.2"
-    vm_ip = '20.163.248.81'
-    vm_username = 'pavan'
-    vm_password = 'Cadfemindia@2023'
-
-    blob_service_client = BlobServiceClient(account_url=f"https://{account_name}.blob.core.windows.net", credential=account_key)
-    blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
-    blob_client2 = blob_service_client.get_blob_client(container=container_name, blob=blob_name2)
-    current_content = blob_client.download_blob().readall().decode('utf-8')
-
-    # Replace the old input strings with the new ones
-    updated_content = current_content.replace('import_filename', input_str1).replace('process_count', input_str2).replace('max_size', input_str3)
-    blob_client2.upload_blob(updated_content, overwrite=True)
-    file_name = "remote_bimetallic.py"
-    vm_location = r"C:\check"  # Location on the VM to copy the file to
-
-    blob_content = blob_client.download_blob().readall()
-
-    # Save the blob's content to a local file
-    local_file_path = 'temp_file'
-    with open(local_file_path, 'wb') as f:
-        f.write(blob_content)
-#code to transfer files to VM is working till this point
-    # Use paramiko to run PowerShell commands on the Windows VM
-    ssh_client = paramiko.SSHClient()
-    ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    #ssh_client.connect(vm_ip, username=vm_username, password=vm_password)
-        
-    # Run PowerShell command to copy the file to the VM
-    #powershell_command = f'Copy-Item "{local_file_path}" "{vm_location}"'
-    #ssh_stdin, ssh_stdout, ssh_stderr = ssh_client.exec_command(f'powershell -command "{powershell_command}"')
-
-    #ssh_client.close()
-
-    return render_template('index.html')
-
-        
+def start_transfer():
+    transfer_files()
+    return jsonify({"message": "Files transferred successfully."})        
 def calculator():  
     
    
@@ -218,13 +202,5 @@ def calculator():
                            C11=in1_len,
                            C111=in2_len,
                            C1111=imp_rad)
-if __name__ == '__main__':
-    vm_ip = "your_vm_ip"
-    rdp_port = 3389
-    is_reachable = check_rdp_connection(vm_ip, rdp_port)
-    
-    if is_reachable:
-        print("VM is reachable over RDP.")
-    else:
-        print("Unable to connect to VM over RDP.")    
+if __name__ == '__main__':   
     app.run(host='0.0.0.0',debug=True)    
