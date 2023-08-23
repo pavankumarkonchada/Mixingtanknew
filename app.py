@@ -105,7 +105,7 @@ def index():
 #code to transfer files to VM is working till this point
     # Use paramiko to run PowerShell commands on the Windows VM
     ssh_client = paramiko.SSHClient()
-    #ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     #ssh_client.connect(vm_ip, username=vm_username, password=vm_password)
         
     # Run PowerShell command to copy the file to the VM
