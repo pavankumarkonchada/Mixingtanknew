@@ -99,26 +99,7 @@ def process_file():
 #    except Exception as e:
 #        return f"Error: {str(e)}"
 
-def transfer_files():
-    blob_service_client = BlobServiceClient.from_connection_string('DefaultEndpointsProtocol=https;AccountName=cadfemstorage;AccountKey=2Q+8yku1CsKNxavljdSnybnyviX1scDZrLgggdnk54R3i7V7KVxNv2YVDXvuSLZy9TeC03KmeIQb+AStelJlnA==;EndpointSuffix=core.windows.net')
-    container_name = 'new-container'
-    blob_name = 'mixing_tank_pyfluent.py'  # Modify this to the name of the blob you want to transfer
 
-    vm_ip = '20.163.248.81:3389'
-    ssh_username = 'pavan'
-    ssh_password = 'Cadfemindia@2023'
-
-        # Connect to Azure Blob Storage
-    container_client = blob_service_client.get_container_client(container_name)
-    blob_client = container_client.get_blob_client(blob_name)
-    blob_data = blob_client.download_blob().readall()
-    
-    # Connect to VM using SSH
-    ssh_client = paramiko.SSHClient()
-    ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh_client.connect(vm_ip, username=ssh_username, password=ssh_password)
-    ssh_client.close()
-    return jsonify({"status": "success"})
             
 def calculator():  
     
