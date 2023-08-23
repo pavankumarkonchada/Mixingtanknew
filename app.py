@@ -60,9 +60,9 @@ def transfer_files():
     container_client = blob_service_client.get_container_client(container_name)
     
     # Connect to VM using SSH
-    ssh_client = paramiko.SSHClient()
-    ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh_client.connect(vm_ip, username=ssh_username, password=ssh_password)
+    #ssh_client = paramiko.SSHClient()
+    #ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    #ssh_client.connect(vm_ip, username=ssh_username, password=ssh_password)
     
     # Download files from Blob Storage and transfer to VM
     
