@@ -65,16 +65,7 @@ def transfer_files():
     ssh_client.connect(vm_ip, username=ssh_username, password=ssh_password)
     
     # Download files from Blob Storage and transfer to VM
-    for blob in container_client.list_blobs():
-        blob_data = blob_client.download_blob(blob)
-        local_filename = blob.name
-        remote_path = 'C:/check/' + local_filename
-        
-        # Upload the file using SFTP
-        sftp = ssh_client.open_sftp()
-        sftp.putfo(blob_data, remote_path)
-        sftp.close()
-    ssh_client.close()
+    
 
 
 @app.route("/", methods=['POST', 'GET'])
@@ -99,7 +90,7 @@ def transfer_files():
 #        return f"Error: {str(e)}"
 
 def start_transfer():
-    #transfer_files()
+    transfer_files()
     return jsonify({"message": "Files transferred successfully."})        
 def calculator():  
     
