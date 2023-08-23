@@ -17,9 +17,9 @@ def transfer_file():
     try:
         # Download the file from GitHub
         #headers = {"Authorization": f"Bearer {github_pat}"}
-        github_api_url = f"https://github.com/pavankumarkonchada/Mixingtanknew/blob/main/lib/pymapdl/mixing_tank_pyfluent.py"
+        github_api_url = f"https://raw.githubusercontent.com/pavankumarkonchada/Mixingtanknew/main/lib/pymapdl/mixing_tank_pyfluent.py"
         response = requests.get(github_api_url)
-        content = response.text
+        content = response.json()
 
         file_content = content["content"]
         file_content_decoded = file_content.encode("utf-8")
