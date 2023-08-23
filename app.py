@@ -7,32 +7,39 @@ app = Flask(__name__)
 
 
 # Azure VM details
-azure_vm_ip = "your_vm_ip_address"
-azure_vm_username = "your_vm_username"
-azure_vm_password = "your_vm_password"
+azure_vm_ip = "20.163.248.81"
+azure_vm_username = "pavan"
+azure_vm_password = "Cadfemindia@2023"
 
 @app.route("/transfer", methods=["GET"])
-def process_file():
+def transfer_file():
     try:
-        # Read user input from the HTML form
-        input_value = 1.2
-        
-        # Read the file from the GitHub repository
-        github_file_url = 'https://github.com/pavankumarkonchada/Mixingtanknew/blob/main/lib/pymapdl/mixing_tank_pyfluent.py'
-        response = requests.get(github_file_url)
-        github_file_content = response.text
-        
-        # Modify the content based on user input
-        modified_content = github_file_content.replace('max_size',str(input_value))
-        print("Running adfajspdfj kajsfpaksdjf")
-        # Send the modified content to the VM through API
-        vm_api_url = 'http://20.163.248.81:80/api/endpoint'
-        vm_api_data = {'content': modified_content}
-        response = requests.post(vm_api_url, json=vm_api_data)
-        
-        return jsonify({"status": "success", "message": "File modified and sent to VM successfully!"})
+        # Download the file from GitHub
+        headers = {"Authorization": f"Bearer {github_pat}"}
+        github_api_url = f"https://api.github.com/repos/pavankumarkonchada/mixingtanknew/contents/lib/pymapdl/mixing_tank_pyfluent.py"
+        response = requests.get(github_api_url, headers=headers)
+        content = response.json()
 
+        file_content = content["content"]
+        file_content_decoded = file_content.encode("utf-8")
+        file_content_decoded = base64.b64decode(file_content_decoded)
+
+        # Establish SSH connection to Azure VM
+        ssh_client = paramiko.SSHClient()
+        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh_client.connect(azure_vm_ip, username=azure_vm_username, password=azure_vm_password)
+
+        # Transfer the file to Azure VM using SCP
+        with ssh_client.open_sftp() as sftp:
+            remote_path = "C:/check/destination.py"
+            with sftp.file(remote_path, "wb") as remote_file:
+                remote_file.write(file_content_decoded)
+
+        ssh_client.close()
+
+        return jsonify({"message": "File transferred successfully"})
     except Exception as e:
-        return jsonify({"status": "error", "message": str(e)})
+        return jsonify({"error": str(e)}), 500
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
