@@ -19,7 +19,7 @@ def process_file():
         modified_content = github_file_content.replace('max_size', str(input_value))
         
         # Send the modified content to the VM through API
-        vm_api_url = 'http://20.163.248.81:80/api/endpoint'
+        vm_api_url = 'http://20.163.248.81/api/endpoint'
         vm_api_data = {'content': modified_content}
         response = requests.post(vm_api_url, json=vm_api_data)
         
