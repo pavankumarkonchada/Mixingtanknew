@@ -86,6 +86,15 @@ def process_file():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
 
+def receive_content():
+    try:
+        content = request.json['content']
+        # Save content to a file on the VM
+        with open('C:\check\mixing_tank_pyfluent1.py', 'w') as file:
+            file.write(content)
+        return jsonify({"status": "success"})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)})
 #def ping_vm(vm_ip):
 #    try:
 #        result = subprocess.run(["ping", "-n", "4", vm_ip], capture_output=True, text=True, timeout=10)
