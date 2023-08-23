@@ -99,7 +99,7 @@ def transfer_files():
 #        return f"Error: {str(e)}"
 
 def start_transfer():
-    transfer_files()
+    #transfer_files()
     return jsonify({"message": "Files transferred successfully."})        
 def calculator():  
     
