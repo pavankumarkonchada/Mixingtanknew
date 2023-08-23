@@ -39,6 +39,7 @@ account_name = 'cadfemstorage'
 account_key = '2Q+8yku1CsKNxavljdSnybnyviX1scDZrLgggdnk54R3i7V7KVxNv2YVDXvuSLZy9TeC03KmeIQb+AStelJlnA=='
 container_name = 'new-container'
 blob_name = 'mixing_tank_pyfluent.py'
+blob_name2 = 'mixing_tank_pyfluent1.py'
 
 def geomext(filename):
     if not "." in filename:
@@ -86,12 +87,12 @@ def index():
 
     blob_service_client = BlobServiceClient(account_url=f"https://{account_name}.blob.core.windows.net", credential=account_key)
     blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
-
+    blob_client2 = blob_service_client.get_blob_client(container=container_name, blob=blob_name2)
     current_content = blob_client.download_blob().readall().decode('utf-8')
 
     # Replace the old input strings with the new ones
     updated_content = current_content.replace('import_filename', input_str1).replace('process_count', input_str2).replace('max_size', input_str3)
-    blob_client.upload_blob(updated_content, overwrite=True)
+    blob_client2.upload_blob(updated_content, overwrite=True)
     file_name = "remote_bimetallic.py"
     vm_location = r"C\check"  # Location on the VM to copy the file to
 
@@ -103,9 +104,9 @@ def index():
         f.write(blob_content)
 #code to transfer files to VM is working till this point
     # Use paramiko to run PowerShell commands on the Windows VM
-    ssh_client = paramiko.SSHClient()
-    ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh_client.connect(vm_ip, username=vm_username, password=vm_password)
+    #ssh_client = paramiko.SSHClient()
+    #ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    #ssh_client.connect(vm_ip, username=vm_username, password=vm_password)
         
     # Run PowerShell command to copy the file to the VM
     #powershell_command = f'Copy-Item "{local_file_path}" "{vm_location}"'
