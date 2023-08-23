@@ -55,7 +55,7 @@ def pyFluent(boundary,growth,cores,flow,mesh,files,wd,out,in1,in2,imp):
     
 
 
-@app.route("/", methods=['POST', 'GET'])
+@app.route("/", methods=['POST'])
 
 #def index():
     #vm_ip = "20.163.248.81:3389"  # Replace with the actual IP address of your Azure VM
