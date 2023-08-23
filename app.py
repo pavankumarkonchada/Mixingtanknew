@@ -22,8 +22,8 @@ def transfer_file():
         content = response.json()
 
         file_content = content["content"]
-        file_content_decoded = file_content.encode("utf-8")
-        file_content_decoded = base64.b64decode(file_content_decoded)
+        #file_content_decoded = file_content.encode("utf-8")
+        file_content_decoded = file_content#base64.b64decode(file_content_decoded)
 
         # Establish SSH connection to Azure VM
         ssh_client = paramiko.SSHClient()
