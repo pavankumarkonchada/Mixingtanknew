@@ -20,7 +20,7 @@ def transfer_file():
         github_api_url = f"https://raw.githubusercontent.com/pavankumarkonchada/Mixingtanknew/main/lib/pymapdl/mixing_tank_pyfluent.py"
         response = requests.get(github_api_url)
         content = response.json()
-
+        print("it is getting the github file")
         file_content = content["content"]
         #file_content_decoded = file_content.encode("utf-8")
         file_content_decoded = file_content#base64.b64decode(file_content_decoded)
