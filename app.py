@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import paramiko
 import requests
+import base64
 
 app = Flask(__name__)
 
