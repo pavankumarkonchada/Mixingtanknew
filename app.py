@@ -18,30 +18,28 @@ session = pywinrm.Session(
 
 @app.route("/")
 def open_notepad():
-    # Trigger the remote command to open Notepad
-    command = "notepad.exe"
-    result = run_remote_command(command)
-    
-    return jsonify({"result": result})
-
-def run_remote_command(command):
     try:
-        # Establish WinRM session
-        shell_id = session.protocol.open_shell()
-        
-        # Run command in the shell
-        command_id = session.protocol.run_command(shell_id, command, [])
-        
-        # Get command output
-        output = session.protocol.get_command_output(shell_id, command_id)
-        
-        # Close the shell
-        session.protocol.cleanup_command(shell_id, command_id)
-        session.protocol.close_shell(shell_id)
-        
-        return output.std_out.decode()
+        private_key_path = '/path/to/your/private_key'
+        username = 'pavan'
+        host = '20.163.248.81'
+
+        # Establish SSH connection
+        private_key = paramiko.RSAKey(filename="C:\Users\pavan\.ssh\id_rsa")
+        ssh_client = paramiko.SSHClient()
+        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh_client.connect(hostname=host, username=username, pkey=private_key)
+
+        # Execute the command remotely (open Notepad)
+        stdin, stdout, stderr = ssh_client.exec_command('notepad.exe')
+        output = stdout.read().decode()
+
+        ssh_client.close()
+
+        return jsonify({"result": output})
     except Exception as e:
-        return str(e)
+        return jsonify({"error": str(e)})
+
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
