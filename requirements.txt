@@ -2,7 +2,7 @@
 # Usage: pip install -r requirements.txt
 azure-storage-blob
 paramiko==2.7.2
-pywinrm
+pywinrm==0.4.1
 pybase64
 azure-mgmt-compute
 azure-identity
