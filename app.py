@@ -4,13 +4,17 @@ import pywinrm
 app = Flask(__name__)
 
 # Azure VM details
-
 azure_vm_ip = '20.163.248.81'
 azure_vm_username = 'pavan'
 azure_vm_password = 'Cadfemindia@2023'
 
 # WinRM connection
-session = pywinrm.Session(azure_vm_ip, auth=(azure_vm_username, azure_vm_password))
+session = pywinrm.Session(
+    azure_vm_ip,
+    auth=(azure_vm_username, azure_vm_password),
+    transport='ntlm',  # You can use 'basic' or 'ntlm' here
+    server_cert_validation='ignore'  # Ignore SSL certificate validation
+)
 
 @app.route("/")
 def open_notepad():
