@@ -20,7 +20,7 @@ azure_vm_password = 'Cadfemindia@2023'
 @app.route("/")
 def open_notepad():
     try:
-        private_key_path = '/id_rsa'
+        private_key_path = '\id_rsa'
         username = 'pavan'
         host = '20.163.248.81'
 
