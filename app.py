@@ -3,8 +3,7 @@ import paramiko
 import requests
 import base64
 from flask import Flask, jsonify
-from azure.identity import DefaultAzureCredential
-from azure.mgmt.compute import ComputeManagementClient
+
 from flask import Flask, request, jsonify
 import paramiko
 
