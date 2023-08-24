@@ -19,24 +19,11 @@ def execute_command():
 
     # Command to open Notepad
     command = 'notepad.exe'
-
-    try:
-        # Create an SSH client instance
-        ssh_client = paramiko.SSHClient()
-        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-
-        # Connect to the VM using username and password
-        ssh_client.connect(vm_ip, username=vm_username, password=vm_password)
-
-        # Execute the command
-        stdin, stdout, stderr = ssh_client.exec_command(command)
-
-        # Close the SSH connection
-        ssh_client.close()
-
-        return jsonify({'message': 'Command executed successfully'})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+response = requests.get(f"http://{vm_ip}:3389")
+if response.status_code == 200:
+    print("VM is reachable")
+else:
+    print("VM is not reachable")
 
 if __name__ == '__main__':
     app.run()
