@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
-#import pywinrm
 import paramiko
-import requests
+import requests  # Import the requests module
+import io
 
 app = Flask(__name__)
 
@@ -10,18 +10,10 @@ azure_vm_ip = '20.163.248.81'
 azure_vm_username = 'pavan'
 azure_vm_password = 'Cadfemindia@2023'
 
-# WinRM connection
-#session = pywinrm.Session(
-#    azure_vm_ip,
-#    auth=(azure_vm_username, azure_vm_password),
-#    transport='ntlm',  # You can use 'basic' or 'ntlm' here
-#    server_cert_validation='ignore'  # Ignore SSL certificate validation
-#)
-
 @app.route("/")
 def open_notepad():
     try:
-        private_key_url = 'https://github.com/pavankumarkonchada/Mixingtanknew/blob/main/id_rsa'
+        private_key_url = 'https://raw.githubusercontent.com/pavankumarkonchada/Mixingtanknew/main/id_rsa'
         username = 'pavan'
         host = '20.163.248.81'
 
@@ -41,8 +33,6 @@ def open_notepad():
         return jsonify({"result": output})
     except Exception as e:
         return jsonify({"error": str(e)})
-
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
