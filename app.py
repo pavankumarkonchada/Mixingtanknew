@@ -2,43 +2,41 @@ from flask import Flask, request, jsonify
 import paramiko
 import requests
 import base64
-import azure.identity
-import azure.mgmt.compute
+from flask import Flask, jsonify
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.compute import ComputeManagementClient
-#import os
+from flask import Flask, request, jsonify
+import paramiko
 
 app = Flask(__name__)
-app.config["DEBUG"] = True
 
+@app.route('/')
+def execute_command():
+    # Get the VM details from the request
+    vm_ip ='20.163.248.81'
+    vm_username = 'pavan'
+    vm_password = 'Cadfemindia@2023'
 
+    # Command to open Notepad
+    command = 'notepad.exe'
 
-# Azure VM details
-azure_vm_ip = "20.163.248.81"
-azure_vm_username = "pavan"
-azure_vm_password = "Cadfemindia@2023"
+    try:
+        # Create an SSH client instance
+        ssh_client = paramiko.SSHClient()
+        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-@app.route("/", methods=["GET"])
-def transfer_file():
+        # Connect to the VM using username and password
+        ssh_client.connect(vm_ip, username=vm_username, password=vm_password)
 
-    subscription_id="caa619ff-3041-4ba1-a933-ee23683796f5"
-    resource_group="cadfemservices"
-    vm_name="cadfemvm"
-    command="ipconfig"
+        # Execute the command
+        stdin, stdout, stderr = ssh_client.exec_command(command)
 
-    #authenticate using managed identity
-    credentials=DefaultAzureCredential()
+        # Close the SSH connection
+        ssh_client.close()
 
-    #create compute management client
-    compute_client=ComputeManagementClient(credentials,subscription_id)
+        return jsonify({'message': 'Command executed successfully'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-    #executing command on VM
-    result=compute_client.virtual_machines.run_command(resource_group,vm_name,{'command_id':'RunShellScript','script':[command]})
-
-    #getting output from the command
-    command_output=result.value[0].message
-    return render_template("index.html")
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+if __name__ == '__main__':
+    app.run()
