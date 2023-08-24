@@ -2,8 +2,8 @@ from flask import Flask, request, jsonify
 import paramiko
 import requests
 import base64
-from azure-mgmt-compute import DefaultAzureCredential
-from Azure.mgmt.compute import ComputeManagementClient
+from azure.identity import DefaultAzureCredential
+from azure.mgmt.compute import ComputeManagementClient
 #import os
 
 app = Flask(__name__)
