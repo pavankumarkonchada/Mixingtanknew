@@ -14,7 +14,7 @@ azure_vm_password = 'Cadfemindia@2023'
 def open_notepad():
     try:
         # Retrieve Private Key from Environment Variable
-        private_key = os.environ.get('PRIVATE_KEY')
+        private_key = os.environ.get('PrivateKey')
 
         # SSH Connection to Azure VM
         ssh = paramiko.SSHClient()
