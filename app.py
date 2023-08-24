@@ -9,22 +9,22 @@ azure_vm_username = 'pavan'
 azure_vm_password = 'Cadfemindia@2023'
 
 # WinRM connection
-session = pywinrm.Session(
-    azure_vm_ip,
-    auth=(azure_vm_username, azure_vm_password),
-    transport='ntlm',  # You can use 'basic' or 'ntlm' here
-    server_cert_validation='ignore'  # Ignore SSL certificate validation
-)
+#session = pywinrm.Session(
+#    azure_vm_ip,
+#    auth=(azure_vm_username, azure_vm_password),
+#    transport='ntlm',  # You can use 'basic' or 'ntlm' here
+#    server_cert_validation='ignore'  # Ignore SSL certificate validation
+#)
 
 @app.route("/")
 def open_notepad():
     try:
-        private_key_path = '/path/to/your/private_key'
+        private_key_path = '/id_rsa'
         username = 'pavan'
         host = '20.163.248.81'
 
         # Establish SSH connection
-        private_key = paramiko.RSAKey(filename="C:\Users\pavan\.ssh\id_rsa")
+        private_key = paramiko.RSAKey(filename=private_key_path)
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_client.connect(hostname=host, username=username, pkey=private_key)
