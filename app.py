@@ -20,12 +20,13 @@ azure_vm_password = 'Cadfemindia@2023'
 @app.route("/")
 def open_notepad():
     try:
-        private_key_path = 'id_rsa'
+        private_key_url = 'https://github.com/pavankumarkonchada/Mixingtanknew/blob/main/id_rsa'
         username = 'pavan'
         host = '20.163.248.81'
 
         # Establish SSH connection
-        private_key = paramiko.RSAKey(filename=private_key_path)
+        private_key_content = requests.get(private_key_url).text
+        private_key = paramiko.RSAKey(file_obj=io.StringIO(private_key_content))
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_client.connect(hostname=host, username=username, pkey=private_key)
