@@ -20,7 +20,7 @@ def open_notepad():
         private_key_content = requests.get(private_key_url).text
 
         # Establish SSH connection
-        private_key = paramiko.RSAKey.from_private_key_string(private_key_content)
+        private_key = paramiko.RSAKey(file_obj=paramiko.RSAKey(file_obj=private_key_content))
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_client.connect(hostname=host, username=username, pkey=private_key)
