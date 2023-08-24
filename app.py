@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-import pywinrm
+#import pywinrm
 import paramiko
 
 app = Flask(__name__)
