@@ -2,8 +2,12 @@ from flask import Flask, request, jsonify
 import paramiko
 import requests
 import base64
+from azure-mgmt-compute import DefaultAzureCredential
+from Azure.mgmt.compute import ComputeManagementClient
+#import os
 
 app = Flask(__name__)
+app.config["DEBUG"] = True
 
 
 
@@ -14,33 +18,25 @@ azure_vm_password = "Cadfemindia@2023"
 
 @app.route("/", methods=["GET"])
 def transfer_file():
-    try:
-        # Download the file from GitHub
-        #headers = {"Authorization": f"Bearer {github_pat}"}
-        github_api_url = f"https://github.com/pavankumarkonchada/Mixingtanknew/tree/main/lib/pymapdl/mixing_tank_pyfluent.py"
-        response = requests.get(github_api_url)
-        content = response.json()
-        print("it is getting the github file")
-        file_content = content["content"]
-        #file_content_decoded = file_content.encode("utf-8")
-        file_content_decoded = file_content#base64.b64decode(file_content_decoded)
 
-        # Establish SSH connection to Azure VM
-        ssh_client = paramiko.SSHClient()
-        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_client.connect(azure_vm_ip, username=azure_vm_username, password=azure_vm_password)
+    subscription_id="caa619ff-3041-4ba1-a933-ee23683796f5"
+    resource_group="cadfemservices"
+    vm_name="cadfemvm"
+    command="ipconfig"
 
-        # Transfer the file to Azure VM using SCP
-        with ssh_client.open_sftp() as sftp:
-            remote_path = "C:/check/destination.py"
-            with sftp.file(remote_path, "wb") as remote_file:
-                remote_file.write(file_content_decoded)
+    #authenticate using managed identity
+    credentials=DefaultAzureCredential()
 
-        ssh_client.close()
+    #create compute management client
+    compute_client=ComputeManagementClient(credentials,subscription_id)
 
-        return jsonify({"message": "File transferred successfully"})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    #executing command on VM
+    result=compute_client.virtual_machines.run_command(resource_group,vm_name,{'command_id':'RunShellScript','script':[command]})
+
+    #getting output from the command
+    command_output=result.value[0].message
+    return render_template("index.html")
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
