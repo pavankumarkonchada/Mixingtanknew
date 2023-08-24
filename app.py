@@ -1,8 +1,6 @@
 from flask import Flask, jsonify
 import paramiko
 import requests
-import tempfile
-import os
 
 app = Flask(__name__)
 
@@ -21,14 +19,8 @@ def open_notepad():
         # Fetch the private key content
         private_key_content = requests.get(private_key_url).text
 
-        # Create a temporary file to write the private key content
-        temp_dir = tempfile.mkdtemp()
-        temp_key_file = os.path.join(temp_dir, 'private_key')
-        with open(temp_key_file, 'w') as temp_file:
-            temp_file.write(private_key_content)
-
         # Establish SSH connection
-        private_key = paramiko.RSAKey(filename=temp_key_file)
+        private_key = paramiko.RSAKey(file_obj=paramiko.RSAKey(file_obj=private_key_content.encode('utf-8')))
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_client.connect(hostname=host, username=username, pkey=private_key)
