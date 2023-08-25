@@ -1,8 +1,8 @@
 from flask import Flask, jsonify
 import paramiko
 import os
-from io import BytesIO  # Use BytesIO for handling bytes
-import base64  # Use base64 module for decoding
+from io import BytesIO
+import base64
 
 app = Flask(__name__)
 
@@ -22,8 +22,9 @@ def open_notepad():
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-        private_key_file = paramiko.RSAKey(file_obj=BytesIO(private_key_bytes))
-        ssh.connect(azure_vm_ip, username=azure_vm_username, pkey=private_key_file)
+        private_key_file = BytesIO(private_key_bytes)  # Wrap the bytes in BytesIO
+        private_key_obj = paramiko.RSAKey(file_obj=private_key_file)
+        ssh.connect(azure_vm_ip, username=azure_vm_username, pkey=private_key_obj)
 
         # Execute the command remotely (open Notepad)
         stdin, stdout, stderr = ssh.exec_command('notepad.exe')
