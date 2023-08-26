@@ -11,17 +11,17 @@ def copy_file():
     vm_ip_address = '52.249.184.159'
     username = 'pavan'
     password = 'Cadfemindia@2023'
-    print("entering function")
+    
     try:
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_client.connect(vm_ip_address, username=username, password=password)
-        print("reaching past SSH connection")
+        
         # SCP the file
         #ftp_client = paramiko.FTPClient(ssh_client)
         #response = ftp_client.sendcmd('PWD')
-        #sftp = ssh_client.open_sftp()
-        #sftp.put(source_file_path, destination_path)
+        sftp = ssh_client.open_sftp()
+        sftp.put(source_file_path, destination_path)
         #with ssh_client.open_sftp() as sftp:
         #    sftp.put(source_file_path, destination_path)
         #ssh_client.exec_command("hostname")
