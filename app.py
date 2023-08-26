@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 def copy_file():
     source_file_path = 'lib\id_rsa'  # Adjust this path
-    destination_path = '/mnt/mydisk/mydisk'    # Adjust this path
+    destination_path = '/Desktop'    # Adjust this path
     vm_ip_address = '52.249.184.159'
     username = 'pavan'
     password = 'Cadfemindia@2023'
@@ -20,11 +20,11 @@ def copy_file():
         # SCP the file
         #ftp_client = paramiko.FTPClient(ssh_client)
         #response = ftp_client.sendcmd('PWD')
-        #sftp = ssh_client.open_sftp()
-        #sftp.put(source_file_path, destination_path)
+        sftp = ssh_client.open_sftp()
+        sftp.put(source_file_path, destination_path)
         #with ssh_client.open_sftp() as sftp:
         #    sftp.put(source_file_path, destination_path)
-        ssh_client.exec_command("hostname")
+        #ssh_client.exec_command("hostname")
         ssh_client.close()
         return 'File copied successfully!'
     except Exception as e:
