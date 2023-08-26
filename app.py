@@ -6,8 +6,8 @@ app = Flask(__name__)
 @app.route('/')
 
 def copy_file():
-    source_file_path = 'id_rsa'  # Adjust this path
-    destination_path = '/mnt/mydisk'    # Adjust this path
+    source_file_path = '/id_rsa'  # Adjust this path
+    destination_path = '/mnt/mydisk/mydisk'    # Adjust this path
     vm_ip_address = '52.249.184.159'
     username = 'pavan'
     password = 'Cadfemindia@2023'
