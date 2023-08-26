@@ -16,7 +16,7 @@ def copy_file():
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_client.connect(vm_ip_address, username=username, password=password)
-        
+        print("reaching past SSH connection")
         # SCP the file
         with ssh_client.open_sftp() as sftp:
             sftp.put(source_file_path, destination_path)
