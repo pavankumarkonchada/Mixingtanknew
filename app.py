@@ -33,6 +33,8 @@ def copy_file():
         path_to_file=os.path.join('/home/mixing/',name_of_file)
         cmd=f"touch {path_to_file}"
         stdin, stdout, stderr =ssh_client.exec_command("touch filename.txt")
+        print(cmd)
+        print(stdout)
         ssh_client.close()
         return 'File copied successfully!'
     except Exception as e:
