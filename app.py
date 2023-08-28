@@ -7,11 +7,11 @@ app = Flask(__name__)
 
 def copy_file():
     source_file_path = 'lib/id_rsa'  # Adjust this path
-    destination_path = '/Desktop'    # Adjust this path
+    destination_path = '/home/mixing'    # Adjust this path
     vm_ip_address = '52.249.184.159'
     username = 'pavan'
     password = 'Cadfemindia@2023'
-    
+    private_key_path = 'lib/id_rsa'
     try:
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
