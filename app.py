@@ -33,7 +33,7 @@ def copy_file():
     path=r'/home/mixing'
     path_to_file=os.path.join(path,name_of_file)
     cmd=f"touch {path_to_file}"
-    stdin, stdout, stderr =ssh_client.exec_command("hostname")
+    stdin, stdout, stderr =ssh_client.exec_command(cmd)
     print(cmd)
     print(stdout)
     ssh_client.close()
