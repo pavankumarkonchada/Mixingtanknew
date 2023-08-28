@@ -29,6 +29,9 @@ def copy_file():
         sftp.put(source_file_path, destination_path)
         #with ssh_client.open_sftp() as sftp:
         #    sftp.put(source_file_path,destination_path)
+        name_of_file="filename.txt"
+        path_to_file=os.path.join('/home/mixing/',name_of_file)
+        cmd=f"touch {path_to_file}"
         stdin, stdout, stderr =ssh_client.exec_command("touch filename.txt")
         ssh_client.close()
         return 'File copied successfully!'
