@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 def copy_file():
     source_file_path = 'lib/id_rsa'  # Adjust this path
-    destination_path = '/home/mixing'    # Adjust this path
+    destination_path = '/home/mixing/id_rsa'    # Adjust this path
     vm_ip_address = '52.249.184.159'
     username = 'pavan'
     password = 'Cadfemindia@2023'
