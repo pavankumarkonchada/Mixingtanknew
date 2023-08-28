@@ -25,8 +25,10 @@ def copy_file():
         #ssh_client.exec_command("hostname")
         ssh_client.close()
         return 'File copied successfully!'
-    except paramiko.ssh_exception.SSHException as e:
-        return f'SSH Error: {e}'
+    except Exception as e:
+        # Log the exception for troubleshooting
+        app.logger.error(f'Error occurred: {e}')
+        return f'Error: {e}
 
 if __name__ == '__main__':
     app.run(debug=True)
