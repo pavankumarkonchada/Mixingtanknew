@@ -32,11 +32,11 @@ def copy_file():
     name_of_file="filename.txt"
     path_to_file=os.path.join('/home/mixing/',name_of_file)
     cmd=f"touch {path_to_file}"
-    stdin, stdout, stderr =ssh_client.exec_command("touch filename.txt")
+    stdin, stdout, stderr =ssh_client.exec_command("hostname")
     print(cmd)
     print(stdout)
     ssh_client.close()
-    return render_template("index.html")
+    return stdout
     #except Exception as e:
         # Log the exception for troubleshooting
     #    app.logger.error(f'Error occurred: {e}')
