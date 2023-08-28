@@ -4,7 +4,6 @@ import paramiko
 app = Flask(__name__)
 
 @app.route('/')
-
 def copy_file():
     source_file_path = 'lib/id_rsa'  # Adjust this path
     destination_path = '/home/mixing/id_rsa'    # Adjust this path
@@ -28,7 +27,7 @@ def copy_file():
     except Exception as e:
         # Log the exception for troubleshooting
         app.logger.error(f'Error occurred: {e}')
-        return f'Error: {e}
+        return f'Error: {e}'
 
 if __name__ == '__main__':
     app.run(debug=True)
