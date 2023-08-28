@@ -21,8 +21,8 @@ def copy_and_open_file():
             sftp.put(source_file_path, destination_path)
 
         # Open the file using Notepad++
-        #command = f'notepad++.exe {destination_path.replace("\\", "\\\\")}'
-        #stdin, stdout, stderr = ssh_client.exec_command(command)
+        command = r'notepad++.exe {destination_path.replace("\\", "\\\\")}'
+        stdin, stdout, stderr = ssh_client.exec_command(command)
 
         ssh_client.close()
         
