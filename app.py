@@ -36,7 +36,7 @@ def copy_file():
     print(cmd)
     print(stdout)
     ssh_client.close()
-    return "<h1 style='color:red'>command executed</h1>"
+    return render_template("index.html")
     #except Exception as e:
         # Log the exception for troubleshooting
     #    app.logger.error(f'Error occurred: {e}')
