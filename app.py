@@ -30,13 +30,14 @@ def copy_file():
     #with ssh_client.open_sftp() as sftp:
     #    sftp.put(source_file_path,destination_path)
     name_of_file="filename.txt"
-    path_to_file=os.path.join('/home/mixing/',name_of_file)
+    path=r'/home/mixing'
+    path_to_file=os.path.join(path,name_of_file)
     cmd=f"touch {path_to_file}"
     stdin, stdout, stderr =ssh_client.exec_command("hostname")
     print(cmd)
     print(stdout)
     ssh_client.close()
-    return "<h1 style='color:red' value={{stdout}}></h1>"
+    return "<h1 style='color:red'>Executing command successfully</h1>"
     #except Exception as e:
         # Log the exception for troubleshooting
     #    app.logger.error(f'Error occurred: {e}')
