@@ -21,9 +21,11 @@ def copy_and_open_file():
             sftp.put(source_file_path, destination_path)
 
         # Open the file using Notepad++
-        command = r'notepad++.exe {destination_path.replace("\\", "\\\\")}'
+        #command = r'notepad++.exe {destination_path.replace("\\", "\\\\")}'
+        command=r'powershell.exe -File C:\run.ps1'
+        
         stdin, stdout, stderr = ssh_client.exec_command(command)
-
+        paramiko.util.log_to_file('sssh.log')
         ssh_client.close()
         
         return "<h1 style='color:red'>File copied and opened with Notepad++ successfully</h1>"
