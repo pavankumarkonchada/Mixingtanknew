@@ -8,7 +8,8 @@ def launch_fluent():
     vm_ip_address = '13.68.168.34'
     username = 'pavan'
     password = 'Cadfemindia@2023'
-    command_to_execute = 'python -c "from ansys.fluent.core import launch_fluent;import ansys.fluent.core as pyfluent;pyfluent.launch_fluent(precision="double", processor_count=4, mode="meshing",show_gui =False)"'
+    command_to_execute = 'python -c "from ansys.fluent.core import launch_fluent;import ansys.fluent.core as pyfluent;pyfluent.launch_fluent(precision=\'double\', processor_count=4, mode=\'meshing\',show_gui =False)"'
+
     
     try:
         ssh_client = paramiko.SSHClient()
