@@ -10,7 +10,7 @@ def launch_fluent():
     username = 'pavan'
     password = 'Cadfemindia@2023'
     ansys_fluent_path = 'C:\\Program Files\\ANSYS Inc\\ANSYS Student\\v231\\fluent\\ntbin\\win64'
-    command_to_execute = f'python -c "from ansys.fluent.core import launch_fluent;import ansys.fluent.core as pyfluent"'
+    command_to_execute = f'python -c "from ansys.fluent.core import launch_fluent;import ansys.fluent.core as pyfluent;pyfluent.launch_fluent(precision=\'double\', processor_count=4, mode=\'meshing\', show_gui=False)"'
 
     try:
         ssh_client = paramiko.SSHClient()
