@@ -1,4 +1,5 @@
 from flask import Flask
+import os
 import paramiko
 
 app = Flask(__name__)
@@ -8,16 +9,17 @@ def launch_fluent():
     vm_ip_address = '13.68.168.34'
     username = 'pavan'
     password = 'Cadfemindia@2023'
-    command_to_execute = 'python -c "from ansys.fluent.core import launch_fluent;import ansys.fluent.core as pyfluent;pyfluent.launch_fluent(precision=\'double\', processor_count=4, mode=\'meshing\',show_gui =False)"'
+    ansys_fluent_path = 'C:\\Program Files\\ANSYS Inc\\ANSYS Student\\v231\\fluent\\ntbin\\win64'
+    command_to_execute = f'python -c "from ansys.fluent.core import launch_fluent;import ansys.fluent.core as pyfluent;pyfluent.launch_fluent(precision=\'double\', processor_count=4, mode=\'meshing\', show_gui=True)"'
 
-    
     try:
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_client.connect(vm_ip_address, username=username, password=password)
 
         # Execute the Fluent launch command on remote VM
-        stdin, stdout, stderr = ssh_client.exec_command(command_to_execute)
+        command_with_path = f'setx PATH "%PATH%;{ansys_fluent_path}" && {command_to_execute}'
+        stdin, stdout, stderr = ssh_client.exec_command(command_with_path)
 
         # Capture and process output
         output = stdout.read().decode()
@@ -25,7 +27,7 @@ def launch_fluent():
 
         paramiko.util.log_to_file('sssh.log')
         ssh_client.close()
-        
+
         return f"<pre>Output: {output}\nError: {error}</pre>"
     except Exception as e:
         app.logger.error(f'Error occurred: {e}')
