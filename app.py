@@ -21,19 +21,25 @@ def copy_and_open_file():
         with ssh_client.open_sftp() as sftp:
             sftp.put(source_file_path, destination_path)
 
-        # Open the file using Notepad++
-        #command = r'notepad++.exe {destination_path.replace("\\", "\\\\")}'
-        command=r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'
-        
-        stdin, stdout, stderr = ssh_client.exec_command(command)
-        paramiko.util.log_to_file('sssh.log')
+        remote_script_path = "C:\\mixing_tank_pyfluent.py"
+
+        # Read and execute each line of the script
+        output_lines = []
+        with open("C:\\mixing_tank_pyfluent.py", "r") as script_file:
+            for line in script_file:
+                # Execute the line on the remote VM
+                command = f"python -c '{line.strip()}'"
+                stdin, stdout, stderr = ssh_client.exec_command(command)
+
+                exit_status = stdout.channel.recv_exit_status()
+                output_lines.append(stdout.read().decode())
+
+        # Close the SSH connection
         ssh_client.close()
-        
-        return "<h1 style='color:red'>File copied and opened with Notepad++ successfully</h1>"
+
+        return jsonify({"status": "success", "output": output_lines})
     except Exception as e:
-        # Log the exception for troubleshooting
-        app.logger.error(f'Error occurred: {e}')
-        return f'Error: {e}'
+        return jsonify({"status": "error", "message": str(e)})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',Debug=True,use_reloader=False,port=5000)
