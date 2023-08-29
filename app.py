@@ -4,7 +4,6 @@ import paramiko
 app = Flask(__name__)
 
 @app.route('/')
-
 def copy_and_open_file():
     source_file_path = 'lib/pymapdl/mixing_tank_pyfluent.py'  # Adjust this path
     destination_path = 'C:\\mixing_tank_pyfluent1.py'  # Adjust this path
@@ -21,16 +20,19 @@ def copy_and_open_file():
         with ssh_client.open_sftp() as sftp:
             sftp.put(source_file_path, destination_path)
 
+        # Open the file using Notepad++
+        #command = r'notepad++.exe {destination_path.replace("\\", "\\\\")}'
         command=r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'
+        
         stdin, stdout, stderr = ssh_client.exec_command(command)
         paramiko.util.log_to_file('sssh.log')
-
-        # Close the SSH connection
         ssh_client.close()
-
-        return jsonify({"status": "success", "output": output_lines})
+        
+        return "<h1 style='color:red'>File copied and opened with Notepad++ successfully</h1>"
     except Exception as e:
-        return jsonify({"status": "error", "message": str(e)})
+        # Log the exception for troubleshooting
+        app.logger.error(f'Error occurred: {e}')
+        return f'Error: {e}'
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0',Debug=True,use_reloader=False,port=5000)
+if name == '__main__':
+    app.run(debug=True)
