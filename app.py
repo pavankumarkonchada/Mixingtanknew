@@ -22,9 +22,14 @@ def copy_and_open_file():
 
         # Open the file using Notepad++
         #command = r'notepad++.exe {destination_path.replace("\\", "\\\\")}'
-        command=r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'
-        
-        stdin, stdout, stderr = ssh_client.exec_command(command)
+		channel=ssh_client.invoke_shell()
+		command=r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'
+		channel.send(command)
+		while True:
+			if channel.recv_ready():
+				output=channel.recv_ready(1024).decode()
+			if channel.exit_status_ready():
+				break
         paramiko.util.log_to_file('sssh.log')
         ssh_client.close()
         
