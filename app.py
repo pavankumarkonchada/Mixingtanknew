@@ -4,6 +4,7 @@ import paramiko
 app = Flask(__name__)
 
 @app.route('/')
+
 def copy_and_open_file():
     source_file_path = 'lib/pymapdl/mixing_tank_pyfluent.py'  # Adjust this path
     destination_path = 'C:\\mixing_tank_pyfluent1.py'  # Adjust this path
@@ -35,4 +36,4 @@ def copy_and_open_file():
         return f'Error: {e}'
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',Debug=True,use_reloader=False,port=5000)
