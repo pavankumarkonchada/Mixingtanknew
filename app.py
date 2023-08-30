@@ -12,11 +12,12 @@ def launch_fluent():
         
         ansys_fluent_path = r'C:\\Program Files\\ANSYS Inc\\ANSYS Student\\v231\\fluent\\ntbin\\win64'
         python_executable = r'C:\\Users\\pavan\\AppData\\Local\\Programs\\Python\\Python311\\python.exe'
-        
         remote_script_path = r'C:\\mixingtank_pyfluent.py'  # Path to the script on the remote VM
 
+        # Construct the command with environment variables and the actual command
         command_to_execute = (
             f'setx PATH "%PATH%;{ansys_fluent_path}" && '
+            f'setx AWP_ROOT231 "{ansys_fluent_path}" && '  # Set the AWP_ROOT231 variable
             f'"{python_executable}" "{remote_script_path}"'
         )
 
