@@ -16,7 +16,7 @@ def launch_fluent():
             r'cmd /C C:\\Users\\pavan\\AppData\\Local\\Programs\\Python\\Python311\\python.exe '
             '-c "from ansys.fluent.core import launch_fluent;'
             'import ansys.fluent.core as pyfluent;'
-            'meshing=pyfluent.launch_fluent(precision=\'double\', processor_count=4, mode=\'meshing\', show_gui=False);'
+            'meshing=pyfluent.launch_fluent(precision='''double''', processor_count=4, mode=\'meshing\', show_gui=False);'
             'meshing.workflow.InitializeWorkflow(WorkflowType=\'Watertight Geometry\');'
             'path=r\\"C:\\\\check\\\\geom1.scdoc\\";'
             'meshing.workflow.TaskObject[\\"Import Geometry\\"].Arguments = {"FileName": path,"LengthUnit": "mm",}"'
