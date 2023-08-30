@@ -22,13 +22,13 @@ def launch_fluent():
             'path=r\\"C:\\\\check\\\\geom1.scdoc\\";'
             'meshing.workflow.TaskObject[\\"Import Geometry\\"].Arguments = {"FileName": path,"LengthUnit": "mm",}"'
         )
-
+        env={'AWP_ROOT231': 'C:\Program Files\ANSYS Inc\ANSYS Student\v231'}
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_client.connect(vm_ip_address, username=username, password=password)
 
         # Execute the Fluent launch command on remote VM
-        stdin, stdout, stderr = ssh_client.exec_command(command_to_execute)
+        stdin, stdout, stderr = ssh_client.exec_command(command_to_execute,Environment=env)
 
         # Capture and process output
         output = stdout.read().decode()
