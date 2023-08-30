@@ -13,7 +13,7 @@ def launch_fluent():
         ansys_fluent_path = r'C:\\Program Files\\ANSYS Inc\\ANSYS Student\\v231\\fluent\\ntbin\\win64'
         command_to_execute = (
             f'setx PATH "%PATH%;{ansys_fluent_path}" && '
-            f'ssh -t {username}@{vm_ip_address} '
+            
             r'cmd /C C:\\Users\\pavan\\AppData\\Local\\Programs\\Python\\Python311\\python.exe '
             '-c "from ansys.fluent.core import launch_fluent;'
             'import ansys.fluent.core as pyfluent;'
