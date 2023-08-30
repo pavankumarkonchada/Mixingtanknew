@@ -10,7 +10,7 @@ def launch_fluent():
         username = 'pavan'
         password = 'Cadfemindia@2023'
         
-        ansys_fluent_path = r'C:\\Program Files\\ANSYS Inc\\ANSYS Student\\v231'
+        ansys_fluent_path = r'C:\\Program Files\\ANSYS Inc\\ANSYS Student\\v231\\fluent\\ntbin\\win64'
         python_executable = r'C:\\Users\\pavan\\AppData\\Local\\Programs\\Python\\Python311\\python.exe'
         remote_script_path = r'C:\\mixingtank_pyfluent.py'  # Path to the script on the remote VM
         env={'AWP_ROOT231': 'C:\Program Files\ANSYS Inc\ANSYS Student\v231'}
