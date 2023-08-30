@@ -21,7 +21,7 @@ def launch_fluent():
         # Execute the Fluent launch command on remote VM
         #env={'AWP_ROOT231': r'C:\Program Files\ANSYS Inc\ANSYS Student\v231'}
         command_with_path = command_to_execute#f'setx PATH "%PATH%;{ansys_fluent_path}" && {command_to_execute}'
-        stdin, stdout, stderr = ssh_client.exec_command(command_with_path, environment=env)
+        stdin, stdout, stderr = ssh_client.exec_command(command_with_path)#, environment=env)
 
         # Capture and process output
         output = stdout.read().decode()
