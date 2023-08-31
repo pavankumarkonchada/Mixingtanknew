@@ -23,7 +23,8 @@ def launch_fluent():
         ssh_client.connect(vm_ip_address, username=username, password=password)
 
         # Execute the Fluent launch command on remote VM
-        stdin, stdout, stderr = ssh_client.exec_command(command_to_execute,environment=env)
+        stdin, stdout, stderr = ssh_client.exec_command("C:\Program Files\ANSYS Inc\ANSYS Student\v231\fluent\ntbin\win64\fluent.exe -meshing -gu")
+        #stdin, stdout, stderr = ssh_client.exec_command(command_to_execute,environment=env)
 
         # Capture and process output
         output = stdout.read().decode()
@@ -37,4 +38,4 @@ def launch_fluent():
         return f'Error: {e}'
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=49672, debug=True)
+    app.run(host='0.0.0.0',debug=True)
