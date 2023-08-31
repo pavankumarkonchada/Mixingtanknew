@@ -10,21 +10,20 @@ def launch_fluent():
         username = 'pavan'
         password = 'Cadfemindia@2023'
 
-        ansys_fluent_path = r'C:\\Program Files\\ANSYS Inc\\ANSYS Student\\v231\\fluent\\ntbin\\win64'
-        python_executable = r'C:\Users\pavan\AppData\Local\Programs\Python\Python311\python.exe'
+        ansys_fluent_path = r'C:\Program Files\ANSYS Inc\ANSYS Student\v231\fluent\ntbin\win64'
         remote_script_path = r'C:\mixingtank_pyfluent.py'  # Path to the script on the remote VM
-        command_to_execute = (
-            f'setx PATH "%PATH%;{ansys_fluent_path}" && '
-            f'"{python_executable}" "{remote_script_path}"'
-        )
-        env={'AWP_ROOT231': 'C:\Program Files\ANSYS Inc\ANSYS Student\v231'}
+        
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_client.connect(vm_ip_address, username=username, password=password)
 
+        # Construct the Fluent command with proper quoting
+        fluent_command = (
+            f'"{ansys_fluent_path}\\fluent.exe" -meshing -gu'
+        )
+
         # Execute the Fluent launch command on remote VM
-        stdin, stdout, stderr = ssh_client.exec_command("C:\Program Files\ANSYS Inc\ANSYS Student\v231\fluent\ntbin\win64\fluent.exe -meshing -gu")
-        #stdin, stdout, stderr = ssh_client.exec_command(command_to_execute,environment=env)
+        stdin, stdout, stderr = ssh_client.exec_command(fluent_command)
 
         # Capture and process output
         output = stdout.read().decode()
@@ -38,4 +37,4 @@ def launch_fluent():
         return f'Error: {e}'
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',debug=True)
+    app.run(host='0.0.0.0', debug=True)
