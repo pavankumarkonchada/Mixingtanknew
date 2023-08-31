@@ -18,9 +18,9 @@ def launch_fluent():
         ssh_client.connect(vm_ip_address, username=username, password=password)
 
         # Construct the Fluent command with proper quoting
-        fluent_command = (
-            f'"{ansys_fluent_path}\\fluent.exe" -meshing -gu'
-        )
+        fluent_command = r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'#(
+            #f'"{ansys_fluent_path}\\fluent.exe" -meshing -gu'
+        #)
 
         # Execute the Fluent launch command on remote VM
         stdin, stdout, stderr = ssh_client.exec_command(fluent_command)
