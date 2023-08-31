@@ -2,6 +2,7 @@ from flask import Flask
 import paramiko
 
 app = Flask(__name__)
+app.config['REQUEST_TIMEOUT'] = 300  # Set your desired timeout value in seconds
 
 @app.route('/')
 def launch_fluent():
