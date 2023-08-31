@@ -7,9 +7,9 @@ app.config['REQUEST_TIMEOUT'] = 300  # Set your desired timeout value in seconds
 @app.route('/')
 def launch_fluent():
     try:
-        vm_ip_address = '13.68.168.34'
-        username = 'pavan'
-        password = 'Cadfemindia@2023'
+        vm_ip_address = '192.168.12.222'
+        username = 'cadfem'
+        password = 'cadfem1'
 
         ansys_fluent_path = r'C:\Program Files\ANSYS Inc\ANSYS Student\v231\fluent\ntbin\win64'
         remote_script_path = r'C:\mixingtank_pyfluent.py'  # Path to the script on the remote VM
