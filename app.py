@@ -18,7 +18,9 @@ def launch_fluent():
         ssh_client.connect(vm_ip_address, username=username, password=password)
 
         # Construct the Fluent command with proper quoting
-        fluent_command = r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'#(
+        fluent_command = f'"{python_executable}" -c "from ansys.fluent.core import launch_fluent;import ansys.fluent.core as pyfluent;pyfluent.launch_fluent(server_info_filepath='''server_info-1688.txt''');solver.check_health();solver.tui.report.system.time_stats()"'
+        #r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'
+        #(
             #f'"{ansys_fluent_path}\\fluent.exe" -meshing -gu'
         #)
 
