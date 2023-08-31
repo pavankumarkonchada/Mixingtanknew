@@ -18,7 +18,7 @@ def launch_fluent():
         ssh_client.connect(vm_ip_address, username=username, password=password)
 
         # Construct the Fluent command with proper quoting
-        fluent_command = (f'"{ansys_fluent_path}\\fluent.exe" -meshing -gu')
+        fluent_command = (f'"{ansys_fluent_path}\\fluent.exe" 3d -meshing -wait')
 
         # Execute the Fluent launch command on remote VM
         stdin, stdout, stderr = ssh_client.exec_command(fluent_command)
