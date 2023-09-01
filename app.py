@@ -31,7 +31,7 @@ def launch_fluent():
 
         ssh_client.close()
 
-        c = Client("cadfemvmwindows", username="pavan", password="Cadfemindia@2023")
+        c = Client("cadfemvmwindows", username="pavan", password="Cadfemindia@2023",encrypt=False)
         c.connect()
         try:
             c.create_service()
