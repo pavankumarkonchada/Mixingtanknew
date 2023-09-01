@@ -33,12 +33,14 @@ def launch_fluent():
 
         c = Client("cadfemvmwindows", username="pavan", password="Cadfemindia@2023",encrypt=False)
         c.connect()
-        try:
-            c.create_service()
-            stdout, stderr, rc = c.run_executable("cmd.exe",arguments="/c echo Hello World")
-        finally:
-            c.remove_service()
-            c.disconnect()
+        c.cleanup()  # this is where the magic happens
+        c.disconnect()
+        #try:
+        #    c.create_service()
+        #    stdout, stderr, rc = c.run_executable("cmd.exe",arguments="/c echo Hello World")
+        #finally:
+        #    c.remove_service()
+        #    c.disconnect()
             
         return f"<pre>Output: {output}\nError: {error}</pre>"
     except Exception as e:
