@@ -27,8 +27,8 @@ def launch_fluent():
         stdin, stdout, stderr = ssh_client.exec_command(fluent_command)
 
         # Capture and process output
-        #output = stdout.read().decode()
-        #error = stderr.read().decode()
+        output = stdout.read().decode()
+        error = stderr.read().decode()
 
         ssh_client.close()
 
