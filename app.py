@@ -35,7 +35,7 @@ def launch_fluent():
         c.connect()
         try:
             c.create_service()
-            stdout, stderr, rc = c.run_executable("notepad.exe", use_system_account=True)
+            stdout, stderr, rc = c.run_executable("cmd.exe",arguments="/c echo Hello World")
         finally:
             c.remove_service()
             c.disconnect()
