@@ -4,6 +4,7 @@ azure-storage-blob
 paramiko==2.7.2
 pywinrm==0.4.1
 pybase64
+pypsexec
 
 # Flask Framework
 Flask>=2.0,<=2.3.2
