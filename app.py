@@ -1,5 +1,6 @@
 from flask import Flask
 import paramiko
+from pypsexec.client import Client
 
 app = Flask(__name__)
 app.config['REQUEST_TIMEOUT'] = 300  # Set your desired timeout value in seconds
@@ -30,6 +31,15 @@ def launch_fluent():
 
         ssh_client.close()
 
+        c = Client("cadfemvmwindows", username="pavan", password="Cadfemindia@2023")
+        c.connect()
+        try:
+            c.create_service()
+            stdout, stderr, rc = c.run_executable("notepad.exe", use_system_account=True)
+        finally:
+            c.remove_service()
+            c.disconnect()
+            
         return f"<pre>Output: {output}\nError: {error}</pre>"
     except Exception as e:
         app.logger.error(f'Error occurred: {e}')
