@@ -1,6 +1,7 @@
 from flask import Flask
 import paramiko
-from pypsexec.client import Client
+#from pypsexec.client import Client
+
 
 app = Flask(__name__)
 app.config['REQUEST_TIMEOUT'] = 300  # Set your desired timeout value in seconds
@@ -20,10 +21,10 @@ def launch_fluent():
         ssh_client.connect(vm_ip_address, username=username, password=password)
 
         # Construct the Fluent command with proper quoting
-        fluent_command = "set DISPLAY=localhost:10.0; xterm & notepad & env"#r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'#(f'"{ansys_fluent_path}\\fluent.exe" 3ddp -meshing -gu -ssh -wait')
+        fluent_command = r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'#(f'"{ansys_fluent_path}\\fluent.exe" 3ddp -meshing -gu -ssh -wait')
 
         # Execute the Fluent launch command on remote VM
-        #stdin, stdout, stderr = ssh_client.exec_command(fluent_command)
+        stdin, stdout, stderr = ssh_client.exec_command(fluent_command)
 
         # Capture and process output
         #output = stdout.read().decode()
@@ -31,10 +32,12 @@ def launch_fluent():
 
         ssh_client.close()
 
-        c = Client("cadfemvmwindows", username="pavan", password="Cadfemindia@2023",encrypt=False)
-        c.connect()
-        c.cleanup()  # this is where the magic happens
-        c.disconnect()
+        
+        
+        #c = Client("cadfemvmwindows", username="pavan", password="Cadfemindia@2023",encrypt=False)
+        #c.connect()
+        #c.cleanup()  # this is where the magic happens
+        #c.disconnect()
         #try:
         #    c.create_service()
         #    stdout, stderr, rc = c.run_executable("cmd.exe",arguments="/c echo Hello World")
