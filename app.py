@@ -23,11 +23,11 @@ def launch_fluent():
         fluent_command = "set DISPLAY=localhost:10.0; xterm & notepad & env"#r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'#(f'"{ansys_fluent_path}\\fluent.exe" 3ddp -meshing -gu -ssh -wait')
 
         # Execute the Fluent launch command on remote VM
-        stdin, stdout, stderr = ssh_client.exec_command(fluent_command)
+        #stdin, stdout, stderr = ssh_client.exec_command(fluent_command)
 
         # Capture and process output
-        output = stdout.read().decode()
-        error = stderr.read().decode()
+        #output = stdout.read().decode()
+        #error = stderr.read().decode()
 
         ssh_client.close()
 
