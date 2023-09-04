@@ -1,7 +1,7 @@
 from flask import Flask
 import paramiko
 #from pypsexec.client import Client
-
+import winrm
 
 app = Flask(__name__)
 app.config['REQUEST_TIMEOUT'] = 300  # Set your desired timeout value in seconds
@@ -12,14 +12,20 @@ def launch_fluent():
         vm_ip_address = '13.68.168.34'
         username = 'pavan'
         password = 'Cadfemindia@2023'
-
+        
+        local_x11_display = xlib_connect.get_display(os.environ['DISPLAY'])
+        local_x11_socket = xlib_connect.get_socket(*local_x11_display[:3])
+        
         ansys_fluent_path = r'C:\Program Files\ANSYS Inc\ANSYS Student\v231\fluent\ntbin\win64'
         remote_script_path = r'C:\mixingtank_pyfluent.py'  # Path to the script on the remote VM
         
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_client.connect(vm_ip_address, username=username, password=password)
-
+        
+        s = winrm.Session('windows-host.example.com', auth=('john.smith', 'secret'))
+        r = s.run_cmd('notepad.exe')
+        
         # Construct the Fluent command with proper quoting
         fluent_command = r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'
         #r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'#(f'"{ansys_fluent_path}\\fluent.exe" 3ddp -meshing -gu -ssh -wait')
