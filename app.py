@@ -10,7 +10,7 @@ SW_SHOWNORMAL = 1
 
 
 app = Flask(__name__)
-app.config['REQUEST_TIMEOUT'] = 300  # Set your desired timeout value in seconds
+#app.config['REQUEST_TIMEOUT'] = 300  # Set your desired timeout value in seconds
 
 @app.route('/')
 def launch_fluent():
