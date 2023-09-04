@@ -6,6 +6,7 @@ import socket
 import Xlib.support.connect as xlib_connect
 import logging
 import select
+import os
 
 LOGGER = logging.getLogger(__name__)
 app = Flask(__name__)
