@@ -29,7 +29,7 @@ def launch_fluent():
         
         channels = {}
         poller = select.poll()
-        def x11_handler(channel, (src_addr, src_port)):
+        def x11_handler(channel):
             x11_chanfd = channel.fileno()
             local_x11_socket = xlib_connect.get_socket(*local_x11_display[:3])
             local_x11_socket_fileno = local_x11_socket.fileno()
@@ -49,7 +49,7 @@ def launch_fluent():
         # start x11 session
         transport = ssh_client.get_transport()
         session = transport.open_session()
-        session.request_x11(handler=x11_handler())
+        session.request_x11(handler=x11_handler(channel))
         session.exec_command('xterm')
         session_fileno = session.fileno()
         poller.register(session_fileno, select.POLLIN)
