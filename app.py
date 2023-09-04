@@ -44,7 +44,7 @@ def launch_fluent():
 
         ssh_client.close()
 
-        connection = pywin32.WMI(computer = '13.68.168.34', user = 'pavan', password = 'Cadfemindia@2023')
+        connection = wmi.WMI(computer = '13.68.168.34', user = 'pavan', password = 'Cadfemindia@2023')
 
         process_startup = connection.Win32_ProcessStartup.new()
         process_startup.ShowWindow = SW_SHOWNORMAL
