@@ -42,7 +42,7 @@ def launch_fluent():
 
         
         
-        c = Client("cadfemvmwindows", username="pavan", password="Cadfemindia@2023",encrypt=False)
+        c = Client("cadfemvmwindows", username="pavan", password="Cadfemindia@2023",encrypt=True)
         c.connect()
         c.cleanup()  # this is where the magic happens
         c.disconnect()
