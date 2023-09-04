@@ -13,8 +13,6 @@ def launch_fluent():
         username = 'pavan'
         password = 'Cadfemindia@2023'
         
-        local_x11_display = xlib_connect.get_display(os.environ['DISPLAY'])
-        local_x11_socket = xlib_connect.get_socket(*local_x11_display[:3])
         
         ansys_fluent_path = r'C:\Program Files\ANSYS Inc\ANSYS Student\v231\fluent\ntbin\win64'
         remote_script_path = r'C:\mixingtank_pyfluent.py'  # Path to the script on the remote VM
