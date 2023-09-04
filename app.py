@@ -3,6 +3,10 @@ import paramiko
 #from pypsexec.client import Client
 import winrm
 from pypsexec.client import Client
+import wmi
+from socket import*
+SW_SHOWNORMAL = 1
+
 
 
 app = Flask(__name__)
@@ -40,18 +44,26 @@ def launch_fluent():
 
         ssh_client.close()
 
+        connection = wmi.WMI(computer = '13.68.168.34', user = 'pavan', password = 'Cadfemindia@2023')
+
+        process_startup = connection.Win32_ProcessStartup.new()
+        process_startup.ShowWindow = SW_SHOWNORMAL
+        process_id, result = connection.Win32_Process.Create(CommandLine="cmd.exe /c C:\\Users\\pavan\\testbat.bat",ProcessStartupInformation=process_startup)
+        if result == 0:
+          print("Process started successfully: %d" % process_id)
+        else:
+          raise RuntimeError
         
-        
-        c = Client("13.68.168.34", username="pavan", password="Cadfemindia@2023",encrypt=True)
-        c.connect()
-        c.cleanup()  # this is where the magic happens
-        c.disconnect()
-        try:
-            c.create_service()
-            stdout, stderr, rc = c.run_executable("cmd.exe",arguments="/c echo Hello World")
-        finally:
-            c.remove_service()
-            c.disconnect()
+        #c = Client("13.68.168.34", username="pavan", password="Cadfemindia@2023",encrypt=True)
+        #c.connect()
+        #c.cleanup()  # this is where the magic happens
+        #c.disconnect()
+        #try:
+        #    c.create_service()
+        #    stdout, stderr, rc = c.run_executable("cmd.exe",arguments="/c echo Hello World")
+        #finally:
+        #    c.remove_service()
+        #    c.disconnect()
             
         return f"<pre>Output: {output}\nError: {error}</pre>"
     except Exception as e:
