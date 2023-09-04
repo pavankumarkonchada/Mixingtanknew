@@ -1,7 +1,8 @@
 # This file is used by pip to install required python packages
 # Usage: pip install -r requirements.txt
 azure-storage-blob
-paramiko#==2.7.2
+paramiko
+#==2.7.2
 pywinrm==0.4.1
 pybase64
 pypsexec
