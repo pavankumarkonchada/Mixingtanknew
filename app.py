@@ -24,8 +24,10 @@ def launch_fluent():
         remote_script_path = r'C:\mixingtank_pyfluent.py'  # Path to the script on the remote VM
         
         ssh_client = paramiko.SSHClient()
-        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_client.connect(vm_ip_address, username=username, password=password)
+        ssh_config=paramiko.SSHConfig()
+        ssh_config.parse(open('ssh_config'))
+        #ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh_client.connect(vm_ip_address, username=username, password=password, config=ssh_config)
 
         transport=ssh_client.get_transport()
         transport.set_x11_forwarding(True)
