@@ -28,7 +28,7 @@ def launch_fluent():
         ssh_client.connect(vm_ip_address, username=username, password=password)
 
         ssh_client.get_transport().set_x11_forwarding(True)
-        ssh_client.get_transport().set_x11_display(:0)
+        ssh_client.get_transport().set_x11_display(":0")
 
         
         #s = winrm.Session('13.68.168.34', auth=('pavan', 'Cadfemindia@2023'))
