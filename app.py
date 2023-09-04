@@ -3,7 +3,7 @@ import paramiko
 #from pypsexec.client import Client
 import winrm
 from pypsexec.client import Client
-import pywin32com
+import wmi
 from socket import*
 SW_SHOWNORMAL = 1
 
