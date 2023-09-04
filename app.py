@@ -49,7 +49,7 @@ def launch_fluent():
         # start x11 session
         transport = ssh_client.get_transport()
         session = transport.open_session()
-        session.request_x11(handler=x11_handler)
+        session.request_x11(handler=x11_handler())
         session.exec_command('xterm')
         session_fileno = session.fileno()
         poller.register(session_fileno, select.POLLIN)
