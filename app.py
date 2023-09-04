@@ -27,9 +27,8 @@ def launch_fluent():
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_client.connect(vm_ip_address, username=username, password=password)
 
-        ssh_client.get_transport().set_x11_forwarding(True)
-        ssh_client.get_transport().set_x11_display(":0")
-
+        transport=ssh_client.get_transport()
+        transport.set_x11_forwarding(True)
         
         #s = winrm.Session('13.68.168.34', auth=('pavan', 'Cadfemindia@2023'))
         #r = s.run_cmd('notepad.exe')
