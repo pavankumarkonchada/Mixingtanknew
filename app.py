@@ -25,8 +25,8 @@ def launch_fluent():
         
         ssh_client = paramiko.SSHClient()
         ssh_config=paramiko.SSHConfig()
-        #ssh_config.parse(open('ssh_config'))
-        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh_config.parse(open(r'C:\programdata\ssh\ssh_config'))
+        #ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_client.connect(vm_ip_address, username=username, password=password, config=ssh_config)
 
         transport=ssh_client.get_transport()
