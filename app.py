@@ -77,7 +77,7 @@ def launch_fluent():
                         channel.close()
                         counterpart.close()
                         del channels[fd]
-        print 'Exit status:', session.recv_exit_status()
+        print ('Exit status:', session.recv_exit_status())
         flush_out(session)
         session.close()
 
