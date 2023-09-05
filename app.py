@@ -2,10 +2,7 @@ from flask import Flask
 import paramiko
 #from pypsexec.client import Client
 import winrm
-from pypsexec.client import Client
-import wmi
-from socket import*
-SW_SHOWNORMAL = 1
+import pyrdp
 
 
 
@@ -28,9 +25,6 @@ def launch_fluent():
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_client.connect(vm_ip_address, username=username, password=password)
         
-        #s = winrm.Session('13.68.168.34', auth=('pavan', 'Cadfemindia@2023'))
-        #r = s.run_cmd('notepad.exe')
-        
         # Construct the Fluent command with proper quoting
         fluent_command = r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'
         #r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'#(f'"{ansys_fluent_path}\\fluent.exe" 3ddp -meshing -gu -ssh -wait')
@@ -44,15 +38,12 @@ def launch_fluent():
 
         ssh_client.close()
 
-        connection = wmi.WMI(computer = '13.68.168.34', user = 'pavan', password = 'Cadfemindia@2023')
-
-        process_startup = connection.Win32_ProcessStartup.new()
-        process_startup.ShowWindow = SW_SHOWNORMAL
-        process_id, result = connection.Win32_Process.Create(CommandLine="cmd.exe /c C:\\Users\\pavan\\testbat.bat",ProcessStartupInformation=process_startup)
-        if result == 0:
-          print("Process started successfully: %d" % process_id)
-        else:
-          raise RuntimeError
+        port=3389
+        with pyrdp.RDPClient(vm_ip_address,port) as client:
+            client.connect()
+            client.login(username,password)
+            app_path=r'C:\Windows\system32\notepad.exe'
+            client.execute(app_path)
         
         #c = Client("13.68.168.34", username="pavan", password="Cadfemindia@2023",encrypt=True)
         #c.connect()
