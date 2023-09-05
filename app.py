@@ -21,8 +21,7 @@ def geomext(filename):
 
 @app.route('/')
 def launch_fluent():
-    try:
-        my_boundary = 4
+	my_boundary = 4
         my_growth = 1.2
         my_cores = 8
         my_flow = 0.5
@@ -47,9 +46,9 @@ def launch_fluent():
         remote_script_path = r'C:\mixingtank_pyfluent.py'  # Path to the script on the remote VM
         source_file_path_scdocscript = 'spaceclaim_script1.py'  # Adjust this path
         destination_path_scdocscript = 'C:\\spaceclaim_script1.py'  # Adjust this path
-	    source_file_path_runwb = 'run_wb1.py'  # Adjust this path
+	source_file_path_runwb = 'run_wb1.py'  # Adjust this path
         destination_path_runwb = 'C:\\run_wb1.py'  # Adjust this path
-	    source_file_path_wbjou = 'fluent_meshing.wbjn'  # Adjust this path
+	source_file_path_wbjou = 'fluent_meshing.wbjn'  # Adjust this path
         destination_path_wbjou = 'C:\\fluent_meshing1.wbjn'  # Adjust this path
 	    
         source_file_path_cxi = 'fluent_layout/Default/.cxlaout.ini'  # Adjust this path
@@ -79,14 +78,25 @@ def launch_fluent():
             wkdir=os.path.join(new_wdir_path, firstfile.filename)
             source_file_path_goem = wkdir  # Adjust this path
             destination_path_geom = 'C:\\geom1.scdoc'  # Adjust this path
-        
+            my_boundary = float(request.form.get('boundary'))
+            my_growth = float(request.form.get('growth'))
+            my_cores = float(request.form.get('cores'))
+            my_flow = float(request.form.get('flow'))
+            my_meshsize = float(request.form.get('meshsize'))
+            out_len= float(request.form.get('outlen'))
+            in1_len= float(request.form.get('in1len'))
+            in2_len= float(request.form.get('in2len'))
+            imp_rad= float(request.form.get('impellerradius'))
+	else:
+            print("method is not post")
+	    
         with ssh_client.open_sftp() as sftp:
-            sftp.put(source_file_path_pyfluent, destination_path_pyfluent)
-			sftp.put(source_file_path_scdocscript, destination_scdocscript)
-			sftp.put(source_file_path_runwb, destination_path_runwb)
-			sftp.put(source_file_path_wbjou, destination_path_wbjou)
-			sftp.put(source_file_path_goem, destination_path_goem)
-            sftp.put(source_file_path_cxi, destination_path_cxi)
+        	sftp.put(source_file_path_pyfluent, destination_path_pyfluent)
+		sftp.put(source_file_path_scdocscript, destination_scdocscript)
+		sftp.put(source_file_path_runwb, destination_path_runwb)
+		sftp.put(source_file_path_wbjou, destination_path_wbjou)
+		sftp.put(source_file_path_goem, destination_path_goem)
+        	sftp.put(source_file_path_cxi, destination_path_cxi)
         
         # Execute the Fluent launch command on remote VM
         stdin, stdout, stderr = ssh_client.exec_command(fluent_command)
@@ -110,10 +120,23 @@ def launch_fluent():
         
         ssh_client.close()
             
-        return f"<pre>Output: {output}\nError: {error}</pre>"
-    except Exception as e:
-        app.logger.error(f'Error occurred: {e}')
-        return f'Error: {e}'
+        return  render_template('inputpage.html',
+                           Flag = flag,
+                           SolveStatus='Solved',
+                           output_image_url=image,
+                           L2=my_boundary,
+                           t2=my_growth,
+                           E21=my_cores,
+                           E22=my_flow,
+                           c21=my_meshsize,
+                           Flag2=flag2,
+                           ip=inlet_press,
+                           ws=shear_int,
+                           C1=out_len,
+                           C11=in1_len,
+                           C111=in2_len,
+                           C1111=imp_rad)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
