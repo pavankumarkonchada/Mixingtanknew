@@ -63,79 +63,79 @@ def launch_fluent():
 	# Construct the Fluent command with proper quoting
 	fluent_command = r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'
 	#r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'#(f'"{ansys_fluent_path}\\fluent.exe" 3ddp -meshing -gu -ssh -wait')
-
-	if request.files:
-		firstfile=request.files["geomfile"]
-		if firstfile.filename=="":
-			print("file needs to have valid name")
-			return "<h1 style='color:red'>ERROR:invalid filename!</h1>"
+	if request.method == 'POST'
+		if request.files:
+			firstfile=request.files["geomfile"]
+			if firstfile.filename=="":
+				print("file needs to have valid name")
+				return "<h1 style='color:red'>ERROR:invalid filename!</h1>"
             
-		if not geomext(firstfile.filename):
-			print("upload geometry file with proper extension")
-			return "<h1 style='color:red'>ERROR: invalid geometry extension!</h1>"
-		#saves the user uploaded file to the user uploaded location
-		firstfile.save(os.path.join(new_wdir_path, firstfile.filename))
-		wkdir=os.path.join(new_wdir_path, firstfile.filename)
-		source_file_path_goem = wkdir  # Adjust this path
-		destination_path_geom = 'C:\\geom1.scdoc'  # Adjust this path
-		my_boundary = float(request.form.get('boundary'))
-		my_growth = float(request.form.get('growth'))
-		my_cores = float(request.form.get('cores'))
-		my_flow = float(request.form.get('flow'))
-		my_meshsize = float(request.form.get('meshsize'))
-		out_len= float(request.form.get('outlen'))
-		in1_len= float(request.form.get('in1len'))
-		in2_len= float(request.form.get('in2len'))
-		imp_rad= float(request.form.get('impellerradius'))
-	else:
-		print("method is not post")
+			if not geomext(firstfile.filename):
+				print("upload geometry file with proper extension")
+				return "<h1 style='color:red'>ERROR: invalid geometry extension!</h1>"
+			#saves the user uploaded file to the user uploaded location
+			firstfile.save(os.path.join(new_wdir_path, firstfile.filename))
+			wkdir=os.path.join(new_wdir_path, firstfile.filename)
+			source_file_path_goem = wkdir  # Adjust this path
+			destination_path_geom = 'C:\\geom1.scdoc'  # Adjust this path
+			my_boundary = float(request.form.get('boundary'))
+			my_growth = float(request.form.get('growth'))
+			my_cores = float(request.form.get('cores'))
+			my_flow = float(request.form.get('flow'))
+			my_meshsize = float(request.form.get('meshsize'))
+			out_len= float(request.form.get('outlen'))
+			in1_len= float(request.form.get('in1len'))
+			in2_len= float(request.form.get('in2len'))
+			imp_rad= float(request.form.get('impellerradius'))
+		else:
+			print("method is not post")
 	    
-		with ssh_client.open_sftp() as sftp:
-			sftp.put(source_file_path_pyfluent, destination_path_pyfluent)
-			sftp.put(source_file_path_scdocscript, destination_scdocscript)
-			sftp.put(source_file_path_runwb, destination_path_runwb)
-			sftp.put(source_file_path_wbjou, destination_path_wbjou)
-			sftp.put(source_file_path_goem, destination_path_goem)
-			sftp.put(source_file_path_cxi, destination_path_cxi)
+	with ssh_client.open_sftp() as sftp:
+		sftp.put(source_file_path_pyfluent, destination_path_pyfluent)
+		sftp.put(source_file_path_scdocscript, destination_scdocscript)
+		sftp.put(source_file_path_runwb, destination_path_runwb)
+		sftp.put(source_file_path_wbjou, destination_path_wbjou)
+		sftp.put(source_file_path_goem, destination_path_goem)
+		sftp.put(source_file_path_cxi, destination_path_cxi)
         
-		# Execute the Fluent launch command on remote VM
-		stdin, stdout, stderr = ssh_client.exec_command(fluent_command)
+	# Execute the Fluent launch command on remote VM
+	stdin, stdout, stderr = ssh_client.exec_command(fluent_command)
 
-		# Capture and process output
-		output = stdout.read().decode()
-		error = stderr.read().decode()
+	# Capture and process output
+	output = stdout.read().decode()
+	error = stderr.read().decode()
         
-		remote_txt=r"C:\check\result.txt"
-		local_txt=r"O:\Mixing_tank_py_web_app\myfile.txt"
-		remote_press=r"C:\check\pressure.png"
-		local_press=r"O:\Mixing_tank_py_web_app\static\pressure.png"
-		remote_vel=r"C:\check\vel_plot.png"
-		local_vel=r"O:\Mixing_tank_py_web_app\static\vel_plot.png"
+	remote_txt=r"C:\check\result.txt"
+	local_txt=r"O:\Mixing_tank_py_web_app\myfile.txt"
+	remote_press=r"C:\check\pressure.png"
+	local_press=r"O:\Mixing_tank_py_web_app\static\pressure.png"
+	remote_vel=r"C:\check\vel_plot.png"
+	local_vel=r"O:\Mixing_tank_py_web_app\static\vel_plot.png"
         
-		with ssh_client.open_sftp() as sftp:
-			sftp.get(remote_txt, local_txt)
-			sftp.get(remote_press, local_press)
-			sftp.get(remote_vel, local_vel)
+	with ssh_client.open_sftp() as sftp:
+		sftp.get(remote_txt, local_txt)
+		sftp.get(remote_press, local_press)
+		sftp.get(remote_vel, local_vel)
 
         
-		ssh_client.close()
+	ssh_client.close()
             
-		return  render_template('inputpage.html',
-					Flag = flag,
-					SolveStatus='Solved',
-					output_image_url=image,
-					L2=my_boundary,
-					t2=my_growth,
-					E21=my_cores,
-					E22=my_flow,
-					c21=my_meshsize,
-					Flag2=flag2,
-					ip=inlet_press,
-					ws=shear_int,
-					C1=out_len,
-					C11=in1_len,
-					C111=in2_len,
-					C1111=imp_rad)
+	return  render_template('inputpage.html',
+				Flag = flag,
+				SolveStatus='Solved',
+				output_image_url=image,
+				L2=my_boundary,
+				t2=my_growth,
+				E21=my_cores,
+				E22=my_flow,
+				c21=my_meshsize,
+				Flag2=flag2,
+				ip=inlet_press,
+				ws=shear_int,
+				C1=out_len,
+				C11=in1_len,
+				C111=in2_len,
+				C1111=imp_rad)
 
 
 if __name__ == '__main__':
