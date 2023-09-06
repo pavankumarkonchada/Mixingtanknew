@@ -87,8 +87,8 @@ def launch_fluent():
 		in1_len= float(request.form.get('in1len'))
 		in2_len= float(request.form.get('in2len'))
 		imp_rad= float(request.form.get('impellerradius'))
-		else:
-			print("method is not post")
+	else:
+		print("method is not post")
 	    
 		with ssh_client.open_sftp() as sftp:
 			sftp.put(source_file_path_pyfluent, destination_path_pyfluent)
