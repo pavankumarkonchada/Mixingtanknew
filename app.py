@@ -59,7 +59,15 @@ def launch_fluent():
 	ssh_config=paramiko.SSHConfig()
 	ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 	ssh_client.connect(vm_ip_address, username=username, password=password)
-        
+
+	with ssh_client.open_sftp() as sftp:
+		sftp.put(source_file_path_pyfluent, destination_path_pyfluent)
+		sftp.put(source_file_path_scdocscript, destination_scdocscript)
+		sftp.put(source_file_path_runwb, destination_path_runwb)
+		sftp.put(source_file_path_wbjou, destination_path_wbjou)
+		sftp.put(source_file_path_goem, destination_path_goem)
+		sftp.put(source_file_path_cxi, destination_path_cxi)
+	
 	# Construct the Fluent command with proper quoting
 	fluent_command = r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'
 	#r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'#(f'"{ansys_fluent_path}\\fluent.exe" 3ddp -meshing -gu -ssh -wait')
@@ -90,13 +98,7 @@ def launch_fluent():
 		else:
 			print("method is not post")
 	    
-	with ssh_client.open_sftp() as sftp:
-		sftp.put(source_file_path_pyfluent, destination_path_pyfluent)
-		sftp.put(source_file_path_scdocscript, destination_scdocscript)
-		sftp.put(source_file_path_runwb, destination_path_runwb)
-		sftp.put(source_file_path_wbjou, destination_path_wbjou)
-		sftp.put(source_file_path_goem, destination_path_goem)
-		sftp.put(source_file_path_cxi, destination_path_cxi)
+	
         
 	# Execute the Fluent launch command on remote VM
 	stdin, stdout, stderr = ssh_client.exec_command(fluent_command)
