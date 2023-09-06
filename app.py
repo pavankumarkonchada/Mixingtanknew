@@ -63,7 +63,7 @@ def launch_fluent():
 	# Construct the Fluent command with proper quoting
 	fluent_command = r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'
 	#r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'#(f'"{ansys_fluent_path}\\fluent.exe" 3ddp -meshing -gu -ssh -wait')
-	if request.method == 'POST'
+	if request.method == 'POST':
 		if request.files:
 			firstfile=request.files["geomfile"]
 			if firstfile.filename=="":
