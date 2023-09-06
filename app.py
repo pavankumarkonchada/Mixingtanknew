@@ -45,34 +45,34 @@ def launch_fluent():
 	ansys_fluent_path = r'C:\Program Files\ANSYS Inc\ANSYS Student\v231\fluent\ntbin\win64'
 	remote_script_path = r'C:\mixingtank_pyfluent.py'  # Path to the script on the remote VM
 	source_file_path_scdocscript = 'spaceclaim_script1.py'  # Adjust this path
-        destination_path_scdocscript = 'C:\\spaceclaim_script1.py'  # Adjust this path
+	destination_path_scdocscript = 'C:\\spaceclaim_script1.py'  # Adjust this path
 	source_file_path_runwb = 'run_wb1.py'  # Adjust this path
 	destination_path_runwb = 'C:\\run_wb1.py'  # Adjust this path
 	source_file_path_wbjou = 'fluent_meshing.wbjn'  # Adjust this path
-        destination_path_wbjou = 'C:\\fluent_meshing1.wbjn'  # Adjust this path
+	destination_path_wbjou = 'C:\\fluent_meshing1.wbjn'  # Adjust this path
 	    
 	source_file_path_cxi = 'fluent_layout/Default/.cxlaout.ini'  # Adjust this path
 	destination_path_cxi = 'C:\\Users\\hrithik\\.cxlayout.ini'  # Adjust this path
 
 
 	ssh_client = paramiko.SSHClient()
-        ssh_config=paramiko.SSHConfig()
-        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_client.connect(vm_ip_address, username=username, password=password)
+	ssh_config=paramiko.SSHConfig()
+	ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+	ssh_client.connect(vm_ip_address, username=username, password=password)
         
-        # Construct the Fluent command with proper quoting
+	# Construct the Fluent command with proper quoting
 	fluent_command = r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'
-        #r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'#(f'"{ansys_fluent_path}\\fluent.exe" 3ddp -meshing -gu -ssh -wait')
+	#r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'#(f'"{ansys_fluent_path}\\fluent.exe" 3ddp -meshing -gu -ssh -wait')
 
 	if request.files:
-        	firstfile=request.files["geomfile"]
-        	if firstfile.filename=="":
-        		print("file needs to have valid name")
-        		return "<h1 style='color:red'>ERROR:invalid filename!</h1>"
+		firstfile=request.files["geomfile"]
+		if firstfile.filename=="":
+			print("file needs to have valid name")
+			return "<h1 style='color:red'>ERROR:invalid filename!</h1>"
             
-        	if not geomext(firstfile.filename):
-        		print("upload geometry file with proper extension")
-        		return "<h1 style='color:red'>ERROR: invalid geometry extension!</h1>"
+		if not geomext(firstfile.filename):
+			print("upload geometry file with proper extension")
+			return "<h1 style='color:red'>ERROR: invalid geometry extension!</h1>"
 		#saves the user uploaded file to the user uploaded location
 		firstfile.save(os.path.join(new_wdir_path, firstfile.filename))
 		wkdir=os.path.join(new_wdir_path, firstfile.filename)
@@ -102,15 +102,15 @@ def launch_fluent():
 		stdin, stdout, stderr = ssh_client.exec_command(fluent_command)
 
 		# Capture and process output
-        	output = stdout.read().decode()
-        	error = stderr.read().decode()
+		output = stdout.read().decode()
+		error = stderr.read().decode()
         
 		remote_txt=r"C:\check\result.txt"
-        	local_txt=r"O:\Mixing_tank_py_web_app\myfile.txt"
-        	remote_press=r"C:\check\pressure.png"
-        	local_press=r"O:\Mixing_tank_py_web_app\static\pressure.png"
-        	remote_vel=r"C:\check\vel_plot.png"
-        	local_vel=r"O:\Mixing_tank_py_web_app\static\vel_plot.png"
+		local_txt=r"O:\Mixing_tank_py_web_app\myfile.txt"
+		remote_press=r"C:\check\pressure.png"
+		local_press=r"O:\Mixing_tank_py_web_app\static\pressure.png"
+		remote_vel=r"C:\check\vel_plot.png"
+		local_vel=r"O:\Mixing_tank_py_web_app\static\vel_plot.png"
         
 		with ssh_client.open_sftp() as sftp:
 			sftp.get(remote_txt, local_txt)
@@ -118,9 +118,9 @@ def launch_fluent():
 			sftp.get(remote_vel, local_vel)
 
         
-        	ssh_client.close()
+		ssh_client.close()
             
-        	return  render_template('inputpage.html',
+		return  render_template('inputpage.html',
 					Flag = flag,
 					SolveStatus='Solved',
 					output_image_url=image,
@@ -139,4 +139,4 @@ def launch_fluent():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+	app.run(host='0.0.0.0', debug=True)
