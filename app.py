@@ -22,7 +22,8 @@ def copy_and_open_file():
 
         # Open the file using Notepad++
         #command = r'notepad++.exe {destination_path.replace("\\", "\\\\")}'
-        command=r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'
+        #command=r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File C:\run.ps1'
+        command=r'python "/home/Desktop/mixing_tank.py"'
         
         stdin, stdout, stderr = ssh_client.exec_command(command)
         paramiko.util.log_to_file('sssh.log')
